@@ -60,7 +60,10 @@ jobs:
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3
         with:
-          working-directory: site
+          #
+          # Our './site' lives in the 'site' subdirectory; so override this.
+          #
+          path: site/_site/
 
   # Deployment job
   deploy:
