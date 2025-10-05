@@ -1,3 +1,8 @@
+{% comment %}
+  _layouts/default.html, forked from the Minimal theme v0.2.0 (blob 0870472)
+  https://github.com/pages-themes/minimal/blob/v0.2.0/_layouts/default.html
+  Licensed under CC0 1.0 Universal.  Modified by Ethan!
+{% endcomment %}
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
@@ -26,6 +31,17 @@
         {% if site.github.is_project_page %}
         <p class="view"><a href="{{ site.github.repository_url }}">View the Project on GitHub <small>{{ site.github.repository_nwo }}</small></a></p>
         {% endif %}
+
+{% assign repo_name = "eyzmeng/site-wisc-sdc-fa25-team" %}
+{% assign repo_base = "https://github.com/eyzmeng/site-wisc-sdc-fa25-team" %}
+{% assign repo_head = "edit" %}
+{% assign repo_root = "site/" %}
+{% assign edit_path = page.path %}
+<p class="view">
+  <a href="{{ repo_base }}/edit/{{ repo_head }}/{{ repo_root }}{{ edit_path }}">Edit on GitHub
+	  <small>{{ repo_name }}</small>
+  </a>
+</p>
 
         {% if site.github.is_user_page %}
         <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
