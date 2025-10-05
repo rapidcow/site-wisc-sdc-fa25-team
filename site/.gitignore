@@ -1,0 +1,5 @@
+.bundle/config
+# Traditionally, `bundle install' is run with --path vendor/bundle.
+# (Or, now that bundle hates me doing that, I need to configure
+# bundle config set path 'vendor/bundle')  So we ignore that too?
+/vendor/bundle
