@@ -37,11 +37,11 @@ jobs:
           ruby-version: '3.1' # Not needed with a .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
-        #
-        # Our site lives in the 'site/' subdirectory; so teach bundle(1)
-        # where to find the Gemfile so it can install the dependencies.
-        #
-        working-directory: site
+          #
+          # Our site lives in the 'site/' subdirectory; so teach bundle(1)
+          # where to find the Gemfile so it can install the dependencies.
+          #
+          working-directory: site
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
@@ -50,10 +50,11 @@ jobs:
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
-        #
-        # Likewise, change to 'site' subdirectory.
-        #
-        working-directory: site
+        with:
+          #
+          # Likewise, change to 'site' subdirectory.
+          #
+          working-directory: site
       - name: Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3
