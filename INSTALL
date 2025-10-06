@@ -1,0 +1,50 @@
+DEPENDENCIES
+
+  (executables)
+    perl    (1) - The Perl 5 Language Interpreter
+    git     (1) - the stupid content tracker
+  (Perl 5 modules)
+    Capture::Tiny - Capture STDOUT and STDERR
+    CGI         - Common Gateway Interface requests and responses
+    JSON::XS    - JSON serialising/deserialising
+
+You should have installed these using your system package manager.
+For the Perl modules, you can install using cpan(1p), or cpanm(1p)
+optionally in a local environment set up with local::lib.  If you
+use cpanm(1p), there is a convenient command you can run:
+
+    cpanm --installdeps <this directory>
+
+or if your current working directory is this directory,
+you may simply run `cpanm --installdeps .'.
+
+Occasionally, you may use the Perl modules provided by your system
+package manager; for instance, on Debian-based distros, you can do
+
+    apt-get install libcgi-pm-perl libjson-xs-perl
+
+INSTALLATION
+
+Run:
+
+    perl Makefile.PL
+    perl Makefile.PL INSTALL_BASE=/srv/www/cgi/lib/<place>
+
+Specify INSTALL_BASE if you don't want it to go into the
+default base directory.  Then repeat the mantra:
+
+    make
+    make test
+    make install
+
+(Hint: You might get more colorful tests if you run `prove -b' intead)
+
+DEVELOPMENT
+
+You do almost the same thing, except...
+
+    cpanm --with-feature=hacker --installdeps <this directory>
+
+Then instead of `make test', run something more comprehensive:
+
+    prove -b t/* xt/*
