@@ -5,8 +5,24 @@ use strict;
 use warnings;
 
 use App::RequestPull::CGI;
+use Socket qw(:crlf);
 
-App::RequestPull::CGI->run unless caller;
+eval { App::RequestPull::CGI->run(\*STDIN) };
+if ($@) {
+	require UUID;
+	UUID::uuid7
+	# Assume are in "production"; do not reveal
+	# more than what's necessary
+	print map { "${_}CRLF" }, (
+		, "Status: 500 Internal Server Error"
+		, 'Content-Type: text/plain; charset="UTF-8"'
+		, ""
+		, "Something went wrong on my end, sorry."
+		, "This incidence will be logged."
+		, ""
+		, "date="
+	);
+}
 
 __END__
 

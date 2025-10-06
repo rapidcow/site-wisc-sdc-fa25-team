@@ -6,6 +6,7 @@
 requires 'Capture::Tiny';
 requires 'CGI';
 requires 'JSON::XS';
+requires 'UUID';
 
 feature 'hacker', "Development deps" => sub {
 	# These are all core...?

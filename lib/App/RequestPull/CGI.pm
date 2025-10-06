@@ -19,7 +19,8 @@ sub usage { sprintf "Usage: POST %s HTTP/1.1$CRLF", @_ }
 
 sub run
 {
-	my $q = CGI->new();
+	# An optional input file handle passed to CGI
+	my $q = CGI->new(@_);
 
 	my $prog = $q->request_uri() // $q->script_name();
 	$prog or ($prog) = ($0 =~ m![^/\\]+\z!g);
@@ -28,7 +29,7 @@ sub run
 	my $method = $q->request_method();
 	defined $method or die "E: Missing REQUEST_METHOD\n";
 
-	if ($method ne 'POST') {
+	unless ($method eq 'POST') {
 		print $q->header(
 			@HTTP_TEXT,
 			-status => '405 Method Not Allowed',
@@ -37,11 +38,17 @@ sub run
 		return;
 	}
 
-	print $q->header(
-		@HTTP_TEXT,
-		-status => '200 OK',
-	);
-	print "Hello from $prog$CRLF";
+	my $mimetype = $q->content_type();
+	unless ($mimetype eq 'application/x-www-form-urlencoded') {
+		print $q->header(
+			@HTTP_TEXT,
+			-status => '415 Unsupported Media Type',
+		);
+		print "Please use application/x-www-form-urlencoded$CRLF";
+		return;
+	}
+
+	$q->param('ref');
 }
 
 1;
@@ -60,9 +67,17 @@ App::RequestPull::CGI - /cgi-bin/request-pull.cgi implementation
 
     App::RequestPull::CGI->run;
 
+    # explicitly...
+    App::RequestPull::CGI->run(\*STDIN);
+
 =head1 DESCRIPTION
 
 This module defines one subroutine, C<run>, which executes
-the CGI script.
+the CGI script.  It accepts the same arguments as C<CGI->new>;
+namely, you can pass a file handle for the HTTP request body.
+
+=head1 SEE ALSO
+
+L<CGI>
 
 =cut
