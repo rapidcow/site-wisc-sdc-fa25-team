@@ -1,0 +1,75 @@
+#!/usr/bin/env perl
+
+use 5.006;
+use strict;
+use warnings;
+BEGIN {
+	eval { require File::Which; File::Which->import() };
+	if ($@) {
+		*which = sub {
+			my $exe = shift;
+			# command -v is a shell built-in... ouch XP
+			my $out = call('which' => $exe);
+			return if $? & ~255;
+			chomp $out; $out;
+		}
+	}
+}
+use File::Spec;
+use IPC::Open3;
+
+my $script_name = 'request-pull.cgi';
+
+@ARGV == 1 or die "Usage: $0 <cgi-bin>\n";
+
+my $out = shift;
+my $exe = which($script_name) or die "E: $script_name not found on PATH\n";
+my $lib = $ENV{'PERL5LIB'};
+my $bin = $ENV{'PATH'};
+
+my $ouf = File::Spec->join($out, $script_name);
+open my $fh, '>', $ouf or die "open $ouf: $!\n";
+print $fh <<EXEC and $fh->flush() or die "write $ouf: $!\n";
+#!/bin/sh
+PATH=@{[quote_sh($bin)]}
+PERL5LIB=@{[quote_sh($lib)]}
+export PATH PERL5LIB
+exec @{[quote_sh($exe)]}
+EXEC
+close $fh;
+
+chmod 0755 => "$out/$script_name";
+warn "Installed at $out/$script_name\n";
+
+sub call
+{
+	my @cmd = @_;
+	open my $stdin, '<', File::Spec->devnull() or die "open </dev/null: $!\n";
+	open my $stderr, '>', File::Spec->devnull() or die "open >/dev/null: $!\n";
+
+	# Let open3 explode if which(1) is not found on PATH
+	my $pid = IPC::Open3::open3($stdin, my $stdout, $stderr, @cmd);
+	my @out;
+	if (defined wantarray) {
+		@out = <$stdout>;
+	}
+	else {
+		1 while <$stdout>;
+	}
+	waitpid $pid, 0;
+	my $wstat = $?;
+
+	close $stderr;
+	close $stdin;
+	$? = $wstat;
+	wantarray ? @out : join q{}, @out;
+}
+
+sub quote_sh
+{
+	my $str = shift;
+
+	$str =~ s/'/'"'"'/g;
+
+	qq{'$str'};
+}
