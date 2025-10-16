@@ -9,7 +9,6 @@ sub load
 	my $class = shift;
 	my $cnf = shift;
 	my $hash;
-	print STDERR 'CAT CAT ' . $cnf. "\n"; `cat $cnf >&2`;
 	unless ($hash = do $cnf) {
 		die "load: couldn't parse config file $cnf: $@" if $@;
 		die "load: couldn't parse config file $cnf: $!\n" unless defined $hash;

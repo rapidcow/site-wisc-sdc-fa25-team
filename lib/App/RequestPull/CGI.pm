@@ -76,7 +76,7 @@ sub run
 	);
 
 	# Validate payload, since it can be dangerous...
-	my $payload = do { local $/; $q->param('POSTDATA') };
+	my $payload = do { local $/; readline $q->param('POSTDATA') };
 	unless ($ctx->check_payload($payload)) {
 		return answer($q, '403 Forbidden', '');
 	}
