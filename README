@@ -1,5 +1,5 @@
 CGI Bridge for propogating the Jekyll site edits.
-This implements `www.rapidcow.org/cgi-bin/request.cgi'.
+This implements `www.rapidcow.org/cgi-bin/request-pull.cgi'.
 
  Hackers!!!  Read INSTALL if you want to try this script yourself!
  There will be NO support; you are all on your own.. so good luck :)
