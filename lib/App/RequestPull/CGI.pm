@@ -76,7 +76,7 @@ sub run
 	);
 
 	# Validate payload, since it can be dangerous...
-	my $payload = do { local $/; readline $q->param('POSTDATA') };
+	my $payload = do { local $/; my $data = $q->param('POSTDATA'); print STDERR "POSTDATA is a @{[ref $data]}\n"; seek($data, 0, 0); readline $data };
 	unless ($ctx->check_payload($payload)) {
 		return answer($q, '403 Forbidden', '');
 	}
