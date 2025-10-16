@@ -12,10 +12,17 @@ sub submit
 {
 	my $self = shift;
 	my %job = @_;
+	my $time = time;
 	my $conn = $self->{REQUEST_QUEUE_FILE};
-	open my $fh, '>+', $conn or die "open $conn: $!\n";
-	print $fh encode_json(\%job) && $fh->flush()
+	# Sort the output, so that we can reasonaly unit-test this :)
+	my $json = JSON::XS->new->canonical;
+	open my $fh, '+>', $conn or die "open $conn: $!\n";
+
+	print $fh $time;
+	print $fh " ";
+	print $fh $json->encode(\%job) and $fh->flush()
 		or die "write $conn: $!\n";
+	print $fh "\n";
 	close $fh;
 }
 

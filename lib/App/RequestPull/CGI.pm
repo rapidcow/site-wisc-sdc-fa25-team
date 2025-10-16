@@ -37,7 +37,6 @@ sub run
 {
 	# An optional input file handle passed to CGI
 	my $q = CGI->new(@_);
-		print STDERR "queue: ", Data::Dumper->new([$q])->Terse(1)->Dump;
 	# Read config from REQ_PULL_CONF; die if otherwise
 	my $cnf = $ENV{'REQ_PULL_CONF'} or die "E: Missing REQ_CONF\n";
 	my $ctx = App::RequestPull::Submit->load($cnf);
@@ -78,23 +77,17 @@ sub run
 	);
 
 	# Validate payload, since it can be dangerous...
-	require Data::Dumper;
-	my $payload = do {
-		local $/; <STDIN>
-	};
+	my $payload = $q->param('POSTDATA');
 	unless ($ctx->check_payload($payload)) {
 		return answer($q, '403 Forbidden', '');
 	}
-	return answer($q, '200 OK', "DEBUG: The Payload you sent me was:$CRLF" .
-		Data::Dumper->new([$payload])->Terse(1)->Dump . "$CRLF" .
-		"And content length is: $ENV{CONTENT_LENGTH}$CRLF");
 	# JSON isn't very type-strict, and under strict ref we
 	# may explode with a runtime error if we are not careful.
 	# So throw these two bad actors out -- all at once...
 	my $json = eval { decode_json($payload) };
 	if ($@ || ref($json) ne 'HASH') {
 		return answer($q, '400 Bad Request',
-			"Invalid JSON: $@${CRLF}Payload: $payload$CRLF");
+			"Invalid JSON${CRLF}");
 	}
 	# Don't want to show this even for debugging....
 	delete $json->{hook}->{config}->{secret};
@@ -103,8 +96,7 @@ sub run
 	$ctx->submit(%$json);
 
 	my $payback = encode_json $json;
-	return answer($q, '202 Accepted',
-		"Your submittion was accepted :)$CRLF$CRLF$payback$CRLF");
+	return answer($q, '202 Accepted', '');
 }
 
 1;
