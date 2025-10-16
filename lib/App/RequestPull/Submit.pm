@@ -40,11 +40,12 @@ sub check_payload
 	my $sig256 = $1;
 
 	require Digest::SHA;  # SHAW???
+	require String::Compare::ConstantTime;
 	my $payload = shift;
 	my $secret = $self->{GITHUB_WEBHOOK_SECRET};
 
 	my $got256 = Digest::SHA::hmac_sha256_hex($payload, $secret);
-	$sig256 eq $got256;
+	String::Compare::ConstantTime::equals($sig256, $got256);
 }
 
 1;
