@@ -76,11 +76,16 @@ sub run
 	);
 
 	# Validate payload, since it can be dangerous...
-	my $payload = do { local $/; my $data = $q->param('POSTDATA'); print STDERR "POSTDATA is a @{[ref $data]}\n"; seek($data, 0, 0); readline $data };
+	require Data::Dumper;
+	my $payload = do {
+		my $data = $q->param('POSTDATA');
+		print STDERR "POSTDATA is a @{[ref $data]}\n";
+		print STDERR "Stringify: ", Data::Dumper->new([$data])->Terse(1)->Dump;
+		seek($data, 0, 0); readline $data; $data
+	};
 	unless ($ctx->check_payload($payload)) {
 		return answer($q, '403 Forbidden', '');
 	}
-	require Data::Dumper;
 	return answer($q, '200 OK', "DEBUG: The Payload you sent me was:$CRLF" .
 		Data::Dumper->new([$payload])->Terse(1)->Dump . "$CRLF" .
 		"And content length is: $ENV{CONTENT_LENGTH}$CRLF");
