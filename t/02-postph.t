@@ -4,8 +4,9 @@ use 5.006;
 use strict;
 use warnings;
 
-use Test::More tests => 2;
+use Test::More tests => 6;
 use App::RequestPull::CGI;
+use Data::Dumper;
 use File::Spec;
 use File::Temp;
 use Socket qw(:crlf);
@@ -124,7 +125,6 @@ $cnf = $tmp[0]->filename;
 $dbf = $tmp[1]->filename;
 
 {
-	require Data::Dumper;
 	open my $fh, '>', $cnf or die "open >temp config ($cnf): $!\n";
 	print $fh Data::Dumper->new([
 		{ REQUEST_QUEUE_FILE => $dbf }
@@ -178,6 +178,103 @@ my %cgi_env = (
 	like($content, qr/\A\d+ \Q$todo_payload\E\n\z/, "database updated");
 	is($out, treol(CRLF, <<HTTP), 'response looks fine');
 Status: 202 Accepted
+Accept: application/json
+Content-Type: text/plain; charset="UTF-8"
+
+HTTP
+}
+
+#
+# Now we truncate db file, update the config file with
+# an HMAC secret, and repeat the test.
+#
+# On the first trial, we give a with valid signature,
+# and the rest should play out exactly the same way.
+#
+# On the second trial, we should be denied access,
+# and the db file should not be modified.
+#
+{
+	open my $fh, '>', $cnf or die "open >temp config ($cnf): $!\n";
+	print $fh Data::Dumper->new([
+		{
+			REQUEST_QUEUE_FILE => $dbf,
+			GITHUB_WEBHOOK_SECRET => 's3cret123',
+		}
+	])->Terse(1)->Dump and $fh->flush()
+	or die "write temp config ($cnf): $!\n";
+	close $fh;
+
+	open $fh, '>', $dbf or die "open >db ($dbf): $!\n";
+	close $fh;
+}
+
+{
+	local %ENV = %cgi_env;
+	$ENV{REQUEST_METHOD} = 'POST';
+	$ENV{CONTENT_TYPE} = 'application/json';
+	$ENV{CONTENT_LENGTH} = 1593;
+	$ENV{HTTP_X_GITHUB_EVENT} = 'push';
+	# Hashed with -secret "s3cret123"
+	$ENV{HTTP_X_HUB_SIGNATURE_256} = 'sha256=a560d2212e16862a38ca60bd057b68fa41c23aea23d508aae10c6cdd1a7d667e';
+
+	{
+		local (*STDIN, *STDOUT);
+
+		# In-memory buffer shouldn't fail...
+		open STDIN, '<', \$payload or die "open <SCALAR failed: $!\n";
+		open STDOUT, '>', \$out or die "open >SCALAR failed: $!\n";
+		App::RequestPull::CGI::run;
+	};
+
+	open my $tfh, '<', $dbf or die "open <temp db ($dbf) failed: $!\n";
+	my $content = do {
+		local ($!, $/);
+		my $data = readline $tfh;
+		!$! or die "read temp db ($dbf) failed: $!\n";
+		$data;
+	};
+	close $tfh;
+
+	like($content, qr/\A\d+ \Q$todo_payload\E\n\z/, "database updated with sig");
+	is($out, treol(CRLF, <<HTTP), 'response looks fine with sig');
+Status: 202 Accepted
+Accept: application/json
+Content-Type: text/plain; charset="UTF-8"
+
+HTTP
+}
+
+{
+	local %ENV = %cgi_env;
+	$ENV{REQUEST_METHOD} = 'POST';
+	$ENV{CONTENT_TYPE} = 'application/json';
+	$ENV{CONTENT_LENGTH} = 1593;
+	$ENV{HTTP_X_GITHUB_EVENT} = 'push';
+	# Hashed with -secret "b4ddie_uvu"
+	$ENV{HTTP_X_HUB_SIGNATURE_256} = 'sha256=2f1636ffcdbca7f9a70c6e2e12235f5c269abea1e9037af7859ac9e6a2f94d0c';
+
+	{
+		local (*STDIN, *STDOUT);
+
+		# In-memory buffer shouldn't fail...
+		open STDIN, '<', \$payload or die "open <SCALAR failed: $!\n";
+		open STDOUT, '>', \$out or die "open >SCALAR failed: $!\n";
+		App::RequestPull::CGI::run;
+	};
+
+	open my $tfh, '<', $dbf or die "open <temp db ($dbf) failed: $!\n";
+	my $content = do {
+		local ($!, $/);
+		my $data = readline $tfh;
+		!$! or die "read temp db ($dbf) failed: $!\n";
+		$data;
+	};
+	close $tfh;
+
+	like($content, qr/\A\d+ \Q$todo_payload\E\n\z/, "database untouched with bag sig");
+	is($out, treol(CRLF, <<HTTP), 'response looks awful with bad sig');
+Status: 403 Forbidden
 Accept: application/json
 Content-Type: text/plain; charset="UTF-8"
 
