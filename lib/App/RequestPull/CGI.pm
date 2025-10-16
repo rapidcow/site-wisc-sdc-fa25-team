@@ -80,7 +80,9 @@ sub run
 	unless ($ctx->check_payload($payload)) {
 		return answer($q, '403 Forbidden', '');
 	}
-	return answer($q, '200 OK', "DEBUG: The Payload you sent me was:$CRLF$payload");
+	require Data::Dumper;
+	return answer($q, '200 OK', "DEBUG: The Payload you sent me was:$CRLF" .
+		Data::Dumper->new([$payload])->Terse(1)->Dump);
 	# JSON isn't very type-strict, and under strict ref we
 	# may explode with a runtime error if we are not careful.
 	# So throw these two bad actors out -- all at once...
