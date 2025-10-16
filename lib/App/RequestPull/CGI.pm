@@ -48,7 +48,13 @@ sub run
 		return;
 	}
 
-	$q->param('ref');
+	print $q->header(
+		@HTTP_TEXT,
+		-status => '202 Accepted',
+	);
+	print "Didn't read a single word$CRLF";
+	print "Thank you for your submission anyways!$CRLF";
+	return;
 }
 
 1;
