@@ -7,7 +7,7 @@ use warnings;
 use App::RequestPull::CGI;
 use Socket qw(:crlf);
 
-eval { App::RequestPull::CGI->run(\*STDIN) };
+eval { App::RequestPull::CGI::run(\*STDIN) };
 if (my $mesg = $@) {
 	require UUID;
 	require POSIX;

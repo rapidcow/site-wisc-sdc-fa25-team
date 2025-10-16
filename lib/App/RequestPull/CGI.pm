@@ -121,16 +121,20 @@ App::RequestPull::CGI - /cgi-bin/request-pull.cgi implementation
 
     use App::RequestPull::CGI;
 
-    App::RequestPull::CGI->run;
+    App::RequestPull::CGI::run;
 
     # explicitly...
-    App::RequestPull::CGI->run(\*STDIN);
+    App::RequestPull::CGI::run(\*STDIN);
 
 =head1 DESCRIPTION
 
 This module defines one subroutine, C<run>, which executes
 the CGI script.  It accepts the same arguments as C<CGI->new>;
 namely, you can pass a file handle for the HTTP request body.
+
+Note that C<run> is not a method but a regular subroutine.
+Do not use the arrow operator to pass the __PACKAGE__, or
+you will be very sorry like I was.
 
 =head1 SEE ALSO
 

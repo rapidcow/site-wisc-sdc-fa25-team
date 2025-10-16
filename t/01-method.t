@@ -53,7 +53,7 @@ my %cgi_env = (
 		local *STDOUT;
 		# In-memory buffer shouldn't fail...
 		open STDOUT, '>', \$out or die "open >SCALAR failed: $!\n";
-		App::RequestPull::CGI->run;
+		App::RequestPull::CGI::run;
 	};
 }
 
@@ -74,7 +74,7 @@ HTTP
 	{
 		local *STDOUT;
 		open STDOUT, '>', \$out or die "open >SCALAR failed: $!\n";
-		App::RequestPull::CGI->run;
+		App::RequestPull::CGI::run;
 	};
 }
 

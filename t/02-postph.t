@@ -120,7 +120,22 @@ my %cgi_env = (
 }
 JSON
 		open STDOUT, '>', \$out or die "open >SCALAR failed: $!\n";
-		App::RequestPull::CGI->run;
+		App::RequestPull::CGI::run;
+
+		#require CGI;
+		#require Data::Dumper;
+		#use feature qw(say);
+		#my $q = CGI->new();
+		#print STDERR "queue: ", Data::Dumper->new([$q])->Terse(1)->Dump;
+
+		#print Data::Dumper->new([{
+		#	'POSTDATA'  => scalar $q->param('POSTDATA'),
+		#	'PUTDATA'   => scalar $q->param('PUTDATA'),
+		#	'PATCHDATA' => scalar $q->param('PATCHDATA'),
+		#}])->Dump;
+
+		#say "Content-Type: " . $q->content_type();
+		#say "Content-Length: " . $ENV{'CONTENT_LENGTH'};
 	};
 
 	print $out, "\n";
