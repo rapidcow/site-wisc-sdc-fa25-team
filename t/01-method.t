@@ -58,6 +58,7 @@ my %cgi_env = (
 
 is($out, treol(CRLF, <<HTTP), "HTTP GET -> 405");
 Status: 405 Method Not Allowed
+Accept: application/json
 Content-Type: text/plain; charset="UTF-8"
 
 Usage: POST /request-pull.cgi HTTP/1.1
@@ -74,6 +75,7 @@ HTTP
 
 is($out, treol(CRLF, <<HTTP), "HTTP POST -> 200");
 Status: 200 OK
+Accept: application/json
 Content-Type: text/plain; charset="UTF-8"
 
 Hello from /request-pull.cgi

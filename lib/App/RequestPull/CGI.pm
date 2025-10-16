@@ -15,8 +15,21 @@ our $VERSION = '0.25.10';
 my @HTTP_TEXT = (
 	-type => 'text/plain; charset="UTF-8"',
 );
+my @HTTP_ACCEPT = (
+	-accept => 'application/json',
+);
 
 sub usage { sprintf "Usage: POST %s HTTP/1.1$CRLF", @_ }
+
+sub answer
+{
+	my ($q, $status, $mesg) = @_;
+	print $q->header(
+		@HTTP_TEXT, @HTTP_ACCEPT,
+		-status => $status,
+	);
+	print $mesg;
+}
 
 sub run
 {
@@ -34,31 +47,55 @@ sub run
 	defined $method or die "E: Missing REQUEST_METHOD\n";
 
 	unless ($method eq 'POST') {
-		print $q->header(
-			@HTTP_TEXT,
-			-status => '405 Method Not Allowed',
-		);
-		print usage($prog);
-		return;
+		return answer($q, '405 Method Not Allowed',
+			usage($prog));
 	}
 
-	my $mimetype = $q->content_type();
-	unless ($mimetype eq 'application/x-www-form-urlencoded') {
-		print $q->header(
-			@HTTP_TEXT,
-			-status => '415 Unsupported Media Type',
-		);
-		print "Please use application/x-www-form-urlencoded$CRLF";
-		return;
+	# We are technically supposed to treat the absence of
+	# a Content-Type header as application/octet-stream,
+	# but... since I'm feeling nice, and I don't want to
+	# make my own debugging life hell, pretend it is the
+	# type we want :)  Hopefully Nginx will be smart enough
+	# to set it to application/octet-stream for misbehaving
+	# user agents...
+	my $mimetype = $q->content_type() // 'application/json';
+	unless ($mimetype eq 'application/json') {
+		return answer('400 Bad Request',
+			"Please use application/json$CRLF");
 	}
 
-	print $q->header(
-		@HTTP_TEXT,
-		-status => '202 Accepted',
+	my $event = $ENV{'HTTP_X_GITHUB_EVENT'};
+	unless (defined $event) {
+		return answer($q, '400 Bad Request',
+			"Missing X-GitHub-Event$CRLF");
+	}
+
+	$event eq 'push' or return answer(
+		'202 Accepted' => "Won't be handling $event :)$CRLF"
 	);
-	print "Didn't read a single word$CRLF";
-	print "Thank you for your submission anyways!$CRLF";
-	return;
+
+	# Validate payload, since it can be dangerous...
+	my $payload = $q->param('POSTDATA');
+	unless ($ctx->check_payload($payload)) {
+		return answer('403 Forbidden', '');
+	}
+	# JSON isn't very type-strict, and under strict ref we
+	# may explode with a runtime error if we are not careful.
+	# So throw these two bad actors out -- all at once...
+	my $json = eval { decode_json($payload) };
+	if ($@ || ref($json) ne 'HASH') {
+		return answer('400 Bad Request',
+			"Invalid JSON$CRLF");
+	}
+	# Don't want to show this even for debugging....
+	delete $json->{hook}->{config}->{secret};
+
+	# XXX: Not a real handler, but I'm curious to see what happens
+	$ctx->submit(%$json);
+
+	my $payback = encode_json $json;
+	return answer('202 Accepted',
+		"Your submittion was accepted :)$CRLF$CRLF$payback$CRLF");
 }
 
 1;
