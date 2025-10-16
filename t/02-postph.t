@@ -121,21 +121,54 @@ my %cgi_env = (
 JSON
 		open STDOUT, '>', \$out or die "open >SCALAR failed: $!\n";
 		App::RequestPull::CGI::run;
-
-		open my $tfh, '<', $dbf or die "open <temp db ($dbf) failed: $!\n";
-		my $content = do {
-			local ($!, $/);
-			my $data = readline $tfh;
-			!$! or die "read temp db ($dbf) failed: $!\n";
-			$data;
-		};
-		close $tfh;
-
-		my $loong = '{"after":"06ad86554c898f467dc24a835026b2e758ae9234","base_ref":"refs/heads/OUR","before":"0000000000000000000000000000000000000000","commits":[],"compare":"https://github.com/eyzmeng/site-wisc-sdc-fa25-team/compare/MY","created":true,"deleted":false,"forced":false,"head_commit":{"added":[],"author":{"email":"uwisc@endfind.me","name":"Ethan Meng","username":"eyzmeng"},"committer":{"email":"uwisc@endfind.me","name":"Ethan Meng","username":"eyzmeng"},"distinct":true,"id":"06ad86554c898f467dc24a835026b2e758ae9234","message":"the parentheticals are unnecessary\n\nfor some reason my sentences today are short???? :o wot (impossible)","modified":["README.md"],"removed":[],"timestamp":"2025-10-15T21:50:20-05:00","tree_id":"3ff0fc053b5aa6bd10ae05fdf234d92f99afe966","url":"https://github.com/eyzmeng/site-wisc-sdc-fa25-team/commit/06ad86554c898f467dc24a835026b2e758ae9234"},"hook":{"config":{}},"pusher":{"email":"ethan@rapidcow.org","name":"eyzmeng"},"ref":"refs/heads/MY","repository":{"created_at":1759597805,"default_branch":"OUR","full_name":"eyzmeng/site-wisc-sdc-fa25-team","html_url":"https://github.com/eyzmeng/site-wisc-sdc-fa25-team","master_branch":"OUR","name":"site-wisc-sdc-fa25-team","pushed_at":1760595477,"stargazers":0,"updated_at":"2025-10-16T02:51:05Z"},"sender":{"login":"eyzmeng","type":"User"}}';
-		like($content, qr/\A\d+ \Q$loong\E\n\z/,
-		"database updated")
 	};
 
+	open my $tfh, '<', $dbf or die "open <temp db ($dbf) failed: $!\n";
+	my $content = do {
+		local ($!, $/);
+		my $data = readline $tfh;
+		!$! or die "read temp db ($dbf) failed: $!\n";
+		$data;
+	};
+	close $tfh;
+
+	my $loong = <<'JSON';
+{
+  "after":"06ad86554c898f467dc24a835026b2e758ae9234",
+  "base_ref":"refs/heads/OUR",
+  "before":"0000000000000000000000000000000000000000",
+  "commits":[],
+  "compare":"https://github.com/eyzmeng/site-wisc-sdc-fa25-team/compare/MY",
+  "created":true,"deleted":false,"forced":false,
+  "head_commit":{
+    "added":[],
+    "author":{"email":"uwisc@endfind.me","name":"Ethan Meng","username":"eyzmeng"},
+    "committer":{"email":"uwisc@endfind.me","name":"Ethan Meng","username":"eyzmeng"},
+    "distinct":true,"id":"06ad86554c898f467dc24a835026b2e758ae9234",
+    "message":"the parentheticals are unnecessary\n\n
+               for some reason my sentences today are short???? :o wot (impossible)",
+    "modified":["README.md"],"removed":[],
+    "timestamp":"2025-10-15T21:50:20-05:00",
+    "tree_id":"3ff0fc053b5aa6bd10ae05fdf234d92f99afe966",
+    "url":"https://github.com/eyzmeng/site-wisc-sdc-fa25-team/
+           commit/06ad86554c898f467dc24a835026b2e758ae9234"
+  },
+  "hook":{"config":{}},
+  "pusher":{"email":"ethan@rapidcow.org","name":"eyzmeng"},
+  "ref":"refs/heads/MY",
+  "repository":{
+    "created_at":1759597805,"default_branch":"OUR",
+    "full_name":"eyzmeng/site-wisc-sdc-fa25-team",
+    "html_url":"https://github.com/eyzmeng/site-wisc-sdc-fa25-team",
+    "master_branch":"OUR","name":"site-wisc-sdc-fa25-team",
+    "pushed_at":1760595477,"stargazers":0,
+    "updated_at":"2025-10-16T02:51:05Z"
+  },
+  "sender":{"login":"eyzmeng","type":"User"}
+}
+JSON
+	$loong =~ s/^\s+//mg; $loong =~ s/\n//g;
+	like($content, qr/\A\d+ \Q$loong\E\n\z/, "database updated");
 	is($out, treol(CRLF, <<HTTP), 'response looks fine');
 Status: 202 Accepted
 Accept: application/json
