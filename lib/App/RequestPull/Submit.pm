@@ -19,6 +19,25 @@ sub submit
 	close $fh;
 }
 
+sub check_payload
+{
+	my $self = shift;
+	# Skip this check if the secret is unknown
+	$self->{GITHUB_WEBHOOK_SECRET} or return 1;
+
+	# But if we have secret, then in this case
+	# we MUST have X-Hub-Signature-256.
+	my $sig256 = $ENV{HTTP_X_HUB_SIGNATURE_256};
+	$sig256 or return 0;
+
+	require Digest::SHA;  # SHAW???
+	my $payload = shift;
+	my $secret = $self->{GITHUB_WEBHOOK_SECRET};
+
+	my $got256 = Digest::SHA::hmac_sha256_hex($payload, $secret);
+	$sig256 eq $got256;
+}
+
 1;
 
 __END__
