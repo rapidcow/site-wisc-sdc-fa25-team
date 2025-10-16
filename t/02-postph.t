@@ -54,9 +54,6 @@ my %cgi_env = (
 	# Hashed with -secret "s3cret123"
 	$ENV{HTTP_X_HUB_SIGNATURE_256} = 'sha256=a560d2212e16862a38ca60bd057b68fa41c23aea23d508aae10c6cdd1a7d667e';
 
-	use CGI;
-	local $CGI::PUTDATA_UPLOAD = 0;
-
 	{
 		local (*STDIN, *STDOUT);
 
