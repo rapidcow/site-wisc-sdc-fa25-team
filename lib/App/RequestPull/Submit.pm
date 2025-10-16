@@ -27,8 +27,10 @@ sub check_payload
 
 	# But if we have secret, then in this case
 	# we MUST have X-Hub-Signature-256.
-	my $sig256 = $ENV{HTTP_X_HUB_SIGNATURE_256};
-	$sig256 or return 0;
+	my $hdr256 = $ENV{HTTP_X_HUB_SIGNATURE_256};
+	# SHA-256 is 256 = 2^8 bits, or 64 = 2^6 nybbles...
+	$hdr256 or $hdr256 !~ /^sha256=([0-9a-f]{64})$/i or return 0;
+	my $sig256 = $1;
 
 	require Digest::SHA;  # SHAW???
 	my $payload = shift;
