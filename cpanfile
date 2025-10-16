@@ -3,7 +3,6 @@
 # Format as specified in:
 # https://metacpan.org/dist/Module-CPANfile/view/lib/cpanfile.pod
 
-requires 'Capture::Tiny';
 # Only needed for signing commits (but it counts as required for ME!)
 requires 'Crypt::GpgME';
 requires 'CGI';

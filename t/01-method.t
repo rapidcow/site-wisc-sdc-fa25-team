@@ -6,7 +6,6 @@ use warnings;
 
 use Test::More tests => 2;
 use App::RequestPull::CGI;
-use Capture::Tiny qw(:all);
 use File::Spec;
 use File::Temp;
 use Socket qw(:crlf);
@@ -15,8 +14,7 @@ use FindBin;
 use lib "$FindBin::Bin/lib";
 use MyTest::Util;
 
-my ($out, $err);
-my ($cnf, $dbf);
+my ($out, $cnf, $dbf);
 
 my @tmp = map File::Temp->new(), 1..2;
 $cnf = $tmp[0]->filename;
@@ -51,7 +49,10 @@ my %cgi_env = (
 	local %ENV = %cgi_env;
 	$ENV{REQUEST_METHOD} = 'GET';
 
-	($out, $err) = capture {
+	{
+		local *STDOUT;
+		# In-memory buffer shouldn't fail...
+		open STDOUT, '>', \$out or die "open >SCALAR failed: $!\n";
 		App::RequestPull::CGI->run;
 	};
 }
@@ -70,7 +71,9 @@ HTTP
 	local %ENV = %cgi_env;
 	$ENV{REQUEST_METHOD} = 'POST';
 
-	($out, $err) = capture {
+	{
+		local *STDOUT;
+		open STDOUT, '>', \$out or die "open >SCALAR failed: $!\n";
 		App::RequestPull::CGI->run;
 	};
 }
