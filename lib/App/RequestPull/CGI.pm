@@ -79,6 +79,7 @@ sub run
 	require Data::Dumper;
 	my $payload = do {
 		my $data = $q->param('POSTDATA');
+		print STDERR "POSTDATA is defined\n" if defined $data;
 		print STDERR "POSTDATA is a @{[ref $data]}\n";
 		print STDERR "Stringify: ", Data::Dumper->new([$data])->Terse(1)->Dump;
 		seek($data, 0, 0); readline $data; $data
