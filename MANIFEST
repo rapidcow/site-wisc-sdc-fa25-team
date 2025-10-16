@@ -1,7 +1,6 @@
 COPYING
 INSTALL
 MANIFEST
-Makefile
 Makefile.PL
 README
 cpanfile
