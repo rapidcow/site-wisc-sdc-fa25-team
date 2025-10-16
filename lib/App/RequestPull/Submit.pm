@@ -16,7 +16,9 @@ sub submit
 	my $conn = $self->{REQUEST_QUEUE_FILE};
 	# Sort the output, so that we can reasonaly unit-test this :)
 	my $json = JSON::XS->new->canonical;
-	open my $fh, '+>', $conn or die "open $conn: $!\n";
+	# +> is not append!!!  It's like w+ to fopen(),
+	# it still truncates the file..... we want >>.
+	open my $fh, '>>', $conn or die "open $conn: $!\n";
 
 	print $fh $time;
 	print $fh " ";
