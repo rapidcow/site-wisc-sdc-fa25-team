@@ -1,7 +1,10 @@
-# Welcome to SDC Fall 2025 Team 11 Site!
+# Welcome to our Team 17's Site!
 
-This magical link leads to [project ideas](ideas/).
+## Quick Links
 
-Create a finance app that tracks your expenses and creates graphs based on the data.
+Outbound links are identified by their domain name.
 
-:)
+*  [How to use this site!](usage/) (**new!!!**)
+*  [Project ideas](ideas/)
+*  Discord.com: [Software Devel Club, #team-17 channel](https://discord.com/channels/1197375935033389087/1421600028681572463)
+*  Discord.com: [Team 17](https://discord.com/channels/1428212879026552872)
