@@ -20,7 +20,7 @@ use IPC::Open3;
 
 my $script_name = 'request-pull.cgi';
 
-@ARGV == 2 or die "Usage: $0 <cgi-bin> <var-root>\n";
+@ARGV == 2 or die "Usage: $0 <cgi-bin> <cgi-cnf>\n";
 
 my $out = shift;
 my $var = shift;
@@ -34,8 +34,8 @@ print $fh <<EXEC and $fh->flush() or die "write $ouf: $!\n";
 #!/bin/sh
 PATH=@{[quote_sh($bin)]}
 PERL5LIB=@{[quote_sh($lib)]}
-REQ_ROOT=@{[quote_sh($var)]}
-export PATH PERL5LIB
+REQ_PULL_CONF=@{[quote_sh($var)]}
+export PATH PERL5LIB REQ_PULL_CONF
 exec @{[quote_sh($exe)]}
 EXEC
 close $fh;
