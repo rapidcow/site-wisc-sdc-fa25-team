@@ -7,6 +7,7 @@ use warnings;
 use CGI;
 use Encode;
 use Socket qw(:crlf);
+use App::RequestPull::Submit;
 
 # See Makefile.PL
 our $VERSION = '0.25.10';
@@ -21,6 +22,9 @@ sub run
 {
 	# An optional input file handle passed to CGI
 	my $q = CGI->new(@_);
+	# Read config from REQ_PULL_CONF; die if otherwise
+	my $cnf = $ENV{'REQ_PULL_CONF'} or die "E: Missing REQ_CONF\n";
+	my $ctx = App::RequestPull::Submit->load($cnf);
 
 	my $prog = $q->request_uri() // $q->script_name();
 	$prog or ($prog) = ($0 =~ m![^/\\]+\z!g);

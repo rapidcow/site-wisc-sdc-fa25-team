@@ -20,9 +20,10 @@ use IPC::Open3;
 
 my $script_name = 'request-pull.cgi';
 
-@ARGV == 1 or die "Usage: $0 <cgi-bin>\n";
+@ARGV == 2 or die "Usage: $0 <cgi-bin> <var-root>\n";
 
 my $out = shift;
+my $var = shift;
 my $exe = which($script_name) or die "E: $script_name not found on PATH\n";
 my $lib = $ENV{'PERL5LIB'};
 my $bin = $ENV{'PATH'};
@@ -33,6 +34,7 @@ print $fh <<EXEC and $fh->flush() or die "write $ouf: $!\n";
 #!/bin/sh
 PATH=@{[quote_sh($bin)]}
 PERL5LIB=@{[quote_sh($lib)]}
+REQ_ROOT=@{[quote_sh($var)]}
 export PATH PERL5LIB
 exec @{[quote_sh($exe)]}
 EXEC

@@ -4,7 +4,7 @@ use warnings;
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-	NAME             => 'App::RequestPull::CGI',
+	NAME             => 'App::RequestPull',
 	VERSION          => '0.25.10',
 	AUTHOR           => 'Ethan Meng <devel@rapidcow.org>',
 	ABSTRACT         => '/cgi-bin/request-pull.cgi implementation',

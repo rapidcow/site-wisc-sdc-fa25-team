@@ -7,6 +7,8 @@ use warnings;
 use Test::More tests => 2;
 use App::RequestPull::CGI;
 use Capture::Tiny qw(:all);
+use File::Spec;
+use File::Temp;
 use Socket qw(:crlf);
 
 use FindBin;
@@ -14,8 +16,24 @@ use lib "$FindBin::Bin/lib";
 use MyTest::Util;
 
 my ($out, $err);
+my ($cnf, $dbf);
+
+my @tmp = map File::Temp->new(), 1..2;
+$cnf = $tmp[0]->filename;
+$dbf = $tmp[1]->filename;
+
+{
+	require Data::Dumper;
+	open my $fh, '>', $cnf or die "open >temp ($cnf): $!\n";
+	print $fh Data::Dumper->new([
+		{ REQUEST_QUEUE_FILE => $dbf }
+	])->Terse(1)->Dump and $fh->flush()
+	or die "write temp ($cnf): $!\n";
+	close $fh;
+}
 
 my %cgi_env = (
+	REQ_PULL_CONF     => $cnf,
 	# The following are stolen from CGI-4.70/t/upload.t
 	# Matching sections of the CGI specs (RFC 3875) to the right:
 	GATEWAY_INTERFACE => 'CGI/1.1',                # 4.1.4
