@@ -7,6 +7,7 @@
 requires 'Crypt::GpgME';
 requires 'CGI';
 requires 'JSON::XS';
+requires 'String::Compare::ConstantTime';
 requires 'UUID';
 
 feature 'hacker', "Development deps" => sub {
