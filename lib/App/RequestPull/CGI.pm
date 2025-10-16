@@ -86,7 +86,7 @@ sub run
 	my $json = eval { decode_json($payload) };
 	if ($@ || ref($json) ne 'HASH') {
 		return answer($q, '400 Bad Request',
-			"Invalid JSON: $@$CRLF");
+			"Invalid JSON: $@${CRLF}Payload: $payload$CRLF");
 	}
 	# Don't want to show this even for debugging....
 	delete $json->{hook}->{config}->{secret};
