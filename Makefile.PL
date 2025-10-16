@@ -19,6 +19,7 @@ WriteMakefile(
 	},
 	PREREQ_PM => {
 		'CGI'      => '0',
+		'String::Compare::ConstantTime' => '0',
 		'JSON::XS' => '0',
 
 		# Encode is core since v5.7.3
