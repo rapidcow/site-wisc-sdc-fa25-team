@@ -1,0 +1,42 @@
+#!/bin/sh
+#
+# This replicates gpgme-config(1), which has been replaced by pkg-config(1),
+# although Crypt::GpgME still depends on it to find the config variables.
+# https://www.gnupg.org/documentation/manuals/gpgme/Building-the-Source.html
+#
+
+[ $# -ne 0 ] ||
+{
+	echo "Usage: $0 <flag> [<flag> ...]"
+	exit 1
+}
+
+while [ $# -ne 0 ]
+do
+	flag=$1
+	shift
+
+	case "$flag" in
+		--prefix)
+			pkg-config --variable=prefix gpgme
+		;;
+		--exec-prefix)
+			pkg-config --variable=exec_prefix gpgme
+		;;
+		--api-version)
+			pkg-config --variable=api_version gpgme
+		;;
+		--libs)
+			pkg-config --libs gpgme
+		;;
+		--cflags)
+			pkg-config --cflags gpgme
+		;;
+		*)
+			echo "Unexpected flag: $flag" >&2
+			exit 1
+		;;
+	esac
+done
+
+# vi: set ai noet:
