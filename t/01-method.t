@@ -65,6 +65,8 @@ Usage: POST /request-pull.cgi HTTP/1.1
 HTTP
 
 {
+	local $TODO = "Now it Doesn't really work without GitHub Webhook event";
+{
 	local %ENV = %cgi_env;
 	$ENV{REQUEST_METHOD} = 'POST';
 
@@ -80,3 +82,4 @@ Content-Type: text/plain; charset="UTF-8"
 
 Hello from /request-pull.cgi
 HTTP
+}
