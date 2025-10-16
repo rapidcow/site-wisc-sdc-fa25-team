@@ -14,51 +14,8 @@ use FindBin;
 use lib "$FindBin::Bin/lib";
 use MyTest::Util;
 
-my ($out, $cnf, $dbf);
-
-my @tmp = map File::Temp->new(), 1..2;
-$cnf = $tmp[0]->filename;
-$dbf = $tmp[1]->filename;
-
-{
-	require Data::Dumper;
-	open my $fh, '>', $cnf or die "open >temp config ($cnf): $!\n";
-	print $fh Data::Dumper->new([
-		{ REQUEST_QUEUE_FILE => $dbf }
-	])->Terse(1)->Dump and $fh->flush()
-	or die "write temp config ($cnf): $!\n";
-	close $fh;
-}
-
-my %cgi_env = (
-	REQ_PULL_CONF     => $cnf,
-	# The following are stolen from CGI-4.70/t/upload.t
-	# Matching sections of the CGI specs (RFC 3875) to the right:
-	GATEWAY_INTERFACE => 'CGI/1.1',                # 4.1.4
-	REQUEST_METHOD    => 'GET',                    # 4.1.12
-	SCRIPT_NAME       => '/request-pull.cgi',      # 4.1.13
-	SERVER_NAME       => 'rapidcow.org',           # 4.1.14
-	SERVER_PORT       => '80',                     # 4.1.15
-	SERVER_PROTOCOL   => 'HTTP/1.1',               # 4.1.16
-	SERVER_SOFTWARE   => 'nginx/1.24.0 (Ubuntu)',  # 4.1.17
-	# Common in fastcgi_params
-	REQUEST_URI     => '/request-pull.cgi',
-);
-
-{
-	local %ENV = %cgi_env;
-	$ENV{REQUEST_METHOD} = 'POST';
-	$ENV{CONTENT_TYPE} = 'application/json';
-	$ENV{CONTENT_LENGTH} = 1593;
-	$ENV{HTTP_X_GITHUB_EVENT} = 'push';
-	# Hashed with -secret "s3cret123"
-	$ENV{HTTP_X_HUB_SIGNATURE_256} = 'sha256=a560d2212e16862a38ca60bd057b68fa41c23aea23d508aae10c6cdd1a7d667e';
-
-	{
-		local (*STDIN, *STDOUT);
-
-		# In-memory buffer shouldn't fail...
-		open STDIN, '<', \<<'JSON' or die "open <SCALAR failed: $!\n";
+# Very long globals
+my $payload = <<'JSON';
 {
   "ref": "refs/heads/MY",
   "before": "0000000000000000000000000000000000000000",
@@ -119,20 +76,12 @@ my %cgi_env = (
   }
 }
 JSON
-		open STDOUT, '>', \$out or die "open >SCALAR failed: $!\n";
-		App::RequestPull::CGI::run;
-	};
 
-	open my $tfh, '<', $dbf or die "open <temp db ($dbf) failed: $!\n";
-	my $content = do {
-		local ($!, $/);
-		my $data = readline $tfh;
-		!$! or die "read temp db ($dbf) failed: $!\n";
-		$data;
-	};
-	close $tfh;
-
-	my $loong = <<'JSON';
+#
+# This is only long because request-pull.cgi is dumb
+# Maybe in the future, it will learn to be more concise.
+#
+my $todo_payload = <<'JSON'; $todo_payload =~ s/^\s+//mg; $todo_payload =~ s/\n//g;
 {
   "after":"06ad86554c898f467dc24a835026b2e758ae9234",
   "base_ref":"refs/heads/OUR",
@@ -167,8 +116,66 @@ JSON
   "sender":{"login":"eyzmeng","type":"User"}
 }
 JSON
-	$loong =~ s/^\s+//mg; $loong =~ s/\n//g;
-	like($content, qr/\A\d+ \Q$loong\E\n\z/, "database updated");
+
+my ($out, $cnf, $dbf);
+
+my @tmp = map File::Temp->new(), 1..2;
+$cnf = $tmp[0]->filename;
+$dbf = $tmp[1]->filename;
+
+{
+	require Data::Dumper;
+	open my $fh, '>', $cnf or die "open >temp config ($cnf): $!\n";
+	print $fh Data::Dumper->new([
+		{ REQUEST_QUEUE_FILE => $dbf }
+	])->Terse(1)->Dump and $fh->flush()
+	or die "write temp config ($cnf): $!\n";
+	close $fh;
+}
+
+my %cgi_env = (
+	REQ_PULL_CONF     => $cnf,
+	# The following are stolen from CGI-4.70/t/upload.t
+	# Matching sections of the CGI specs (RFC 3875) to the right:
+	GATEWAY_INTERFACE => 'CGI/1.1',                # 4.1.4
+	REQUEST_METHOD    => 'GET',                    # 4.1.12
+	SCRIPT_NAME       => '/request-pull.cgi',      # 4.1.13
+	SERVER_NAME       => 'rapidcow.org',           # 4.1.14
+	SERVER_PORT       => '80',                     # 4.1.15
+	SERVER_PROTOCOL   => 'HTTP/1.1',               # 4.1.16
+	SERVER_SOFTWARE   => 'nginx/1.24.0 (Ubuntu)',  # 4.1.17
+	# Common in fastcgi_params
+	REQUEST_URI     => '/request-pull.cgi',
+);
+
+{
+	local %ENV = %cgi_env;
+	$ENV{REQUEST_METHOD} = 'POST';
+	$ENV{CONTENT_TYPE} = 'application/json';
+	$ENV{CONTENT_LENGTH} = 1593;
+	$ENV{HTTP_X_GITHUB_EVENT} = 'push';
+	# Hashed with -secret "s3cret123"
+	$ENV{HTTP_X_HUB_SIGNATURE_256} = 'sha256=a560d2212e16862a38ca60bd057b68fa41c23aea23d508aae10c6cdd1a7d667e';
+
+	{
+		local (*STDIN, *STDOUT);
+
+		# In-memory buffer shouldn't fail...
+		open STDIN, '<', \$payload or die "open <SCALAR failed: $!\n";
+		open STDOUT, '>', \$out or die "open >SCALAR failed: $!\n";
+		App::RequestPull::CGI::run;
+	};
+
+	open my $tfh, '<', $dbf or die "open <temp db ($dbf) failed: $!\n";
+	my $content = do {
+		local ($!, $/);
+		my $data = readline $tfh;
+		!$! or die "read temp db ($dbf) failed: $!\n";
+		$data;
+	};
+	close $tfh;
+
+	like($content, qr/\A\d+ \Q$todo_payload\E\n\z/, "database updated");
 	is($out, treol(CRLF, <<HTTP), 'response looks fine');
 Status: 202 Accepted
 Accept: application/json
