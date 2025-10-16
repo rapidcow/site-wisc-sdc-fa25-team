@@ -61,7 +61,7 @@ sub run
 	# user agents...
 	my $mimetype = $q->content_type() // 'application/json';
 	unless ($mimetype eq 'application/json') {
-		return answer($q, '400 Bad Request',
+		return answer($q, '415 Unsupported Media Type',
 			"Please use application/json$CRLF");
 	}
 
