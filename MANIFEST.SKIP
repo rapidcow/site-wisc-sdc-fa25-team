@@ -1,4 +1,3 @@
 MANIFEST.SKIP
-etc/
-helper/
+helper/gpgme-config
 xt/

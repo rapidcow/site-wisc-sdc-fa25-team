@@ -5,6 +5,7 @@ Makefile
 Makefile.PL
 README
 cpanfile
+etc/config.pl
 install-cgi
 lib/App/RequestPull.pm
 lib/App/RequestPull/CGI.pm
