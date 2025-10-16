@@ -60,7 +60,7 @@ sub run
 	# user agents...
 	my $mimetype = $q->content_type() // 'application/json';
 	unless ($mimetype eq 'application/json') {
-		return answer('400 Bad Request',
+		return answer($q, '400 Bad Request',
 			"Please use application/json$CRLF");
 	}
 
@@ -77,14 +77,14 @@ sub run
 	# Validate payload, since it can be dangerous...
 	my $payload = $q->param('POSTDATA');
 	unless ($ctx->check_payload($payload)) {
-		return answer('403 Forbidden', '');
+		return answer($q, '403 Forbidden', '');
 	}
 	# JSON isn't very type-strict, and under strict ref we
 	# may explode with a runtime error if we are not careful.
 	# So throw these two bad actors out -- all at once...
 	my $json = eval { decode_json($payload) };
 	if ($@ || ref($json) ne 'HASH') {
-		return answer('400 Bad Request',
+		return answer($q, '400 Bad Request',
 			"Invalid JSON$CRLF");
 	}
 	# Don't want to show this even for debugging....
@@ -94,7 +94,7 @@ sub run
 	$ctx->submit(%$json);
 
 	my $payback = encode_json $json;
-	return answer('202 Accepted',
+	return answer($q, '202 Accepted',
 		"Your submittion was accepted :)$CRLF$CRLF$payback$CRLF");
 }
 
