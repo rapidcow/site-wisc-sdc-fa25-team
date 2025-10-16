@@ -6,6 +6,7 @@ use warnings;
 
 use CGI;
 use Encode;
+use JSON::XS;
 use Socket qw(:crlf);
 use App::RequestPull::Submit;
 
