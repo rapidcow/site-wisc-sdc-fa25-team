@@ -4,6 +4,7 @@ use 5.016;
 use strict;
 use warnings;
 
+use Scalar::Util qw(blessed);
 use CGI;
 use Encode;
 use JSON::XS;
@@ -36,6 +37,7 @@ sub run
 {
 	# An optional input file handle passed to CGI
 	my $q = CGI->new(@_);
+		print STDERR "queue: ", Data::Dumper->new([$q])->Terse(1)->Dump;
 	# Read config from REQ_PULL_CONF; die if otherwise
 	my $cnf = $ENV{'REQ_PULL_CONF'} or die "E: Missing REQ_CONF\n";
 	my $ctx = App::RequestPull::Submit->load($cnf);
@@ -78,11 +80,7 @@ sub run
 	# Validate payload, since it can be dangerous...
 	require Data::Dumper;
 	my $payload = do {
-		my $data = $q->param('POSTDATA');
-		print STDERR "POSTDATA is defined\n" if defined $data;
-		print STDERR "POSTDATA is a @{[ref $data]}\n";
-		print STDERR "Stringify: ", Data::Dumper->new([$data])->Terse(1)->Dump;
-		seek($data, 0, 0); readline $data; $data
+		local $/; <STDIN>
 	};
 	unless ($ctx->check_payload($payload)) {
 		return answer($q, '403 Forbidden', '');
