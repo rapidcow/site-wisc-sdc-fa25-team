@@ -1,2 +1,4 @@
 MANIFEST.SKIP
+etc/
+helper/
 xt/
