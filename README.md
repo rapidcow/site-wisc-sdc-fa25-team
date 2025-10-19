@@ -1,7 +1,7 @@
 # Team Wiki EDIT
 
 Here is the downstream branch you can freely edit
-the [GitHub](GitHub) Pages content under the `sites/`
+the GitHub Pages content under the `sites/`
 subdirectory, separate from the
 [upstream branch](https://github.com/rapidcow/site-wisc-sdc-fa25-team/tree/sync/edit)
 and [deployment branch](https://github.com/rapidcow/site-wisc-sdc-fa25-team/tree/gh-pages)
