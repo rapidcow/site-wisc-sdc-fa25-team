@@ -72,8 +72,11 @@ sub run
 			"Missing X-GitHub-Event$CRLF");
 	}
 
-	$event eq 'push' or return answer(
-		'202 Accepted' => "Won't be handling $event :)$CRLF"
+	$event eq 'ping' and return answer($q,
+		'202 Accepted' => "Ping!$CRLF"
+	);
+	$event eq 'push' or return answer($q,
+		'202 Accepted' => "Thanks, but I won't be handling $event :)$CRLF"
 	);
 
 	# Validate payload, since it can be dangerous...
