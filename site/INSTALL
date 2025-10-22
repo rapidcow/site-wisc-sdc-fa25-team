@@ -2,3 +2,27 @@ I keep forgetting this command....
 
 	bundle config set --local path vendor/bundle
 	bundle exec jekyll serve
+
+If net/http screeches something ugly because gitHub's CRL (whatever that means):
+
+	Configuration file: /home/tree/view/our/fork/github.com/rapidcow/site-wisc-sdc-fa25-team/site/_config.yml
+	To use retry middleware with Faraday v2.0+, install `faraday-retry` gem
+		    Source: /home/tree/view/our/fork/github.com/rapidcow/site-wisc-sdc-fa25-team/site
+	       Destination: /home/tree/view/our/fork/github.com/rapidcow/site-wisc-sdc-fa25-team/site/_site
+	 Incremental build: disabled. Enable with --incremental
+	      Generating...
+	      Remote Theme: Using theme pages-themes/minimal
+	jekyll 3.10.0 | Error:  SSL_connect returned=1 errno=0 peeraddr=140.82.112.10:443 state=error: certificate verify failed (unable to get certificate CRL)
+	/usr/lib/ruby/3.4.0/net/protocol.rb:46:in 'OpenSSL::SSL::SSLSocket#connect_nonblock': SSL_connect returned=1 errno=0 peeraddr=140.82.112.10:443 state=error: certificate verify failed (unable to get certificate CRL) (OpenSSL::SSL::SSLError)
+		from /usr/lib/ruby/3.4.0/net/protocol.rb:46:in 'Net::Protocol#ssl_socket_connect'
+
+just tell it to shut up:
+
+	echo 'OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE' >> shutupssl.rb
+	RUBYOPT='-ropenssl -r./shutupssl.rb' bundle exec jekyll serve
+
+(Trick learned from <https://stackoverflow.com/a/1113614>)
+
+(Of course this means that MITM can happen, but idc that's what
+happens when you require Internet connection for a stupid SSG >:(((
+shame on you GitHub go write a 2500-word reflection on why you did this
