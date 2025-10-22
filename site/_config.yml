@@ -7,6 +7,7 @@ repository: rapidcow/site-wisc-sdc-fa25-team
 url: https://rapidcow.github.io
 # Really? https://stackoverflow.com/a/67612754
 baseurl: /site-wisc-sdc-fa25-team
+favicon: favicon.ico
 
 src_name: "eyzmeng/site-wisc-sdc-fa25-team"
 src_base: "https://github.com/eyzmeng/site-wisc-sdc-fa25-team"

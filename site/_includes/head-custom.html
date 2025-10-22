@@ -1,0 +1,16 @@
+{% if site.favicon %}
+    {% assign ext = site.favicon | split: '.' | last | downcase %}
+    {% case ext %}
+    {% when 'ico' %}
+        {% assign icon_mime = 'image/vnd.microsoft.icon' %}
+    {% when 'png' %}
+        {% assign icon_mime = 'image/png' %}
+    {% when 'jpg' or 'jpeg' %}
+        {% assign icon_mime = 'image/jpeg' %}
+    {% when 'svg' %}
+        {% assign icon_mime = 'image/svg+xml' %}
+    {% else %}
+        {% assign icon_mime = nil %}
+    {% endcase %}
+    <link rel="shortcut icon" {% if icon_mime %}type="{{ icon_mime }}"{% endif %} href="{{ site.favicon | relative_url }}">
+{% endif %}
