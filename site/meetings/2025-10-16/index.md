@@ -1,4 +1,4 @@
-# Ethan's Meeting Memo: Thursday, 2025 October 16
+# Ethan's Meeting Memo: Thursday, October 16
 
 (I think Allie will be posting hers in the Discord server soon?
 This will be mine anyways.  I'm putting something down and hopefully

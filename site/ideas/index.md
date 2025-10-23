@@ -28,8 +28,10 @@ Bookkeeping/Finance
     date of posting, transaction ID.  And understands budgets.  Bonus point
     if it is general-purposed enough to be re-used for any kind of exchange
     (such as time in exchange of money; or in-game tokens in exchange of other
-    in-game resources).  Bonus point if (as Bridget proposes above) it can
+    in-game resources).  Bonus point if (as Deyan proposes above) it can
     draw pretty graphs.  Extra bonus points again if it is FOSS too.
+
+    Details in [graphical-ledger](graphical-ledger).
 
 From the [October 16 meeting](../meetings/2025-10-16/#project-brainstorm) we've seen some good ideas too 6ᴗ6
 

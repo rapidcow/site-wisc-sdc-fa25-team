@@ -23,6 +23,6 @@ computation/prediction; for presentation we can use
 Matplotlib/[Seaborn](https://seaborn.pydata.org/index.html)
 or R-Studio (if anyone knows how to use that...)
 
-## Roadmap
+## Milestones
 
 [Will be added if we go with this project!]

@@ -41,6 +41,6 @@ Definitely [Python binding of OpenCV](https://pypi.org/project/opencv-python/).
 The rest well... there should be *plenty* of YouTube videos on this. :)
 
 
-## Roadmap
+## Milestones
 
 [Same deal; if we go with this project, roadmap will be added :]
