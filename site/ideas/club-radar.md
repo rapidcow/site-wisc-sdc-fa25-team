@@ -29,9 +29,9 @@ can just use their domain.  The framework listed on the whiteboard were Flask
 
 ## Software Stack
 
-I don't know? (but see the paragraphs above for some ideas)
+I don't know? (but see the paragraph above for some proposed frameworks)
 
 
-## Roadmap
+## Milestones
 
 [Will be updated when we go for this idea...]

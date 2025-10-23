@@ -5,8 +5,10 @@ the GitHub Pages content under the `sites/`
 subdirectory, separate from the
 [upstream branch](https://github.com/rapidcow/site-wisc-sdc-fa25-team/tree/sync/edit)
 and [deployment branch](https://github.com/rapidcow/site-wisc-sdc-fa25-team/tree/gh-pages)
-so that no one deletes important CI files and no one removes
-one another's idea.
+so that ~~no one deletes important CI files~~ and no one removes
+one another's idea.  (Actually, GitHub Actions are disabled,
+since I found out about webhooks.  So there won't be that
+risk anyways :)
 
 Please refrain from editing anything file outside of the `site/`
 as I will ignore them when merging into deployment.  Please also
