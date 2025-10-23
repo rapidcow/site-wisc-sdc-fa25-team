@@ -2,9 +2,9 @@
 
 [[Today's Polls](.)] [[All polls](..)]
 
-| **Opened**  | N/A      |
+| **Opened**  | Thu, 23 Oct 2025 03:37 -0500    |
 | **Ended**   | N/A      |
-| **URL**     |          |
+| **URL**     | <https://discord.com/channels/1428212879026552872/1430837025061474314/1430837561609162763> |
 
 I was definitely overthinking this.
 
