@@ -2,6 +2,6 @@
 
 [[See all polls](..)]
 
-*   [Project decision](project) (pending)
-*   [Survey: Git VCS](git-vcs) (pending)
-*   [Survey: Collaboration skills](hacking) (pending)
+*   [Project decision](project) (live!)
+*   [Survey: Git VCS](git-vcs) (live!)
+*   [Survey: Collaboration skills](hacking) (live!)
