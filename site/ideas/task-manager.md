@@ -14,8 +14,8 @@ always forget you can do \*facepalm\*), there is --- and I believe ---
 still value in taking responsibilities into our own hands: especially when
 we have a personal project where there is no roadmap and no partial
 project deadlines and check-ups laid out for us.  And well, we could use
-Obsidian and Notion, Microsoft Tasks, Google Tasks... or use [TaskWarrior](https://taskwarrior.org/)
-like me!  We would be re-inventing an existing solution, but that's fine
+Obsidian and Notion, Microsoft Tasks, Google Tasks... or use [TaskWarrior][]
+[like](like) me!  We would be re-inventing an existing solution, but that's fine
 --- it would be just as valuable as an experience, and maybe we can add
 a creative twist to it....
 
@@ -61,6 +61,28 @@ Mobile app so we're going with the standard Android stack!
     than the big industry Maven I hope ^^)
 
 If our app is good enough, we may publish it to ~~the Play Store~~ F-Droid :)
+
+
+## Related
+
+[Vikunja][] seems like a cool to-do list app.
+It's open-source and self-hosted.
+There is a demo at <https://try.vikunja.io/login>
+you can play with.
+
+I just found out today about [Tudu][].
+And it seems cool too (namely with subtask feature).
+
+Besides that definitely check out [TaskWarrior][].
+And maybe [Todo.txt][] too?  Oh and, just a personal
+piece of advice, but in general, [org-mode](https://code.meskio.net/tudu/)
+and [Vimwiki](https://vimwiki.github.io/) are two things
+worth looking into. :)
+
+[Vikunja]: https://vikunja.io/
+[TaskWarrior]: https://taskwarrior.org/docs/start/
+[Todo.txt]: http://todotxt.org/
+[Tudu]: https://vimwiki.github.io/
 
 ## Milestone
 

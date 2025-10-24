@@ -74,13 +74,82 @@ I know how to obtain a permanent GitHub link to a commit, tree, or blob.
 
 I know how to inspect the symmetric difference of two diverging branches.
 :   `git rev-list --left-right --count A...B` for a number
-    and `git log --left-right --graph A...B`.  Or find yourself
-    a [Git prompt](https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh)
+    and `git log --left-right --graph A...B`.  (The triple-dot
+    notation is the symmetric difference; see [gitrevisions(7)](https://git-scm.com/docs/gitrevisions#Documentation/gitrevisions.txt-Thethree-dotSymmetricDifferenceNotation).)
+    Or find yourself a [Git prompt][git-prompt.sh]
     that can display the numbers for you (but you still need
     `git log` to figure out *who* those commits are!)
+
+    There is a [clarification posted below](#clarification-symmetric-difference).
 
 I understand that including "@" followed by a name in my Git commit message will ping the user in GitHub with that name, no matter how hard I try to scream at GitHub not to do that.
 :   In particular, try not to describe Javadoc tags literally
     in your commits.  I'm not saying you *couldn't*... but just so
     you don't accidentally embarrass yourself
     [like I did](https://github.com/eyzmeng/TAP-for-Java/commit/4fcafe735d3b684e0b5e268d152c1c875b713154).
+
+
+## Clarification: Symmetric Difference
+
+Regarding "symmetric difference"... it may be the first time you have
+heard of it being called this way.  But basically, it's a measure of how
+different the histories of any two given branches are.  The conventional
+order used by Git itself is to start with the commits **you** have but
+they don't, followed by the commits **they** have but you don't.  If both
+differences are zero, then you and they have the exact same commits.
+Else if the number of either of these differences is zero, it means you
+can push (you give them your new commits they don't have) or pull (they
+give you new commits you don't have), in a process called [fast-forwarding](https://git-scm.com/docs/gitglossary#Documentation/gitglossary.txt-fast-forward)
+where neither of you lose any commits.
+
+If the number of these differences is nonzero, then each of you have
+something the other doesn't, and we have a problem: the naive push/pull
+would be impossible.  The branches starting at these two commits are
+therefore said to *diverge*.  **If you understand what it means for
+branches to diverge when the counts of the symmetric difference are
+both nonzero**, you can check that option.
+
+I say it helps to have a Git prompt such as
+[git-prompt.sh][] or [gitstatus from Powerlevel10k](https://github.com/romkatv/gitstatus)
+because they usually display the count on each side of the
+symmetric difference.  Git shows something similar to these
+prompts when you and your upstream diverges, though only when
+you run some specific commands (such as **git-checkout**(1)
+or **git-switch**(1)).  Here is a hypothetical scenario that
+I sent to the group due to [this Reddit post](https://old.reddit.com/r/git/comments/8ixdg2/how_to_clean_up_your_branch_diverged_message/):
+
+```
+xtian@spaceghost> git checkout dev                        
+Switched to branch 'dev'
+Your branch and 'MyParser/dev' have diverged,
+and have 3 and 1 different commits each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+```
+
+Using `__git_ps1` from git-prompt.sh, you would get the
+same numbers:
+
+```
+(main|u+3-1)$
+```
+
+In this hypothetical scenario, you could check the 3
+commits **you** (`dev`) have but they don't and the 1
+commit **they** (`MyParser/dev`) have but you don't have
+by running:
+
+```
+git log --left-right dev...MyParser/dev
+```
+
+which would annotate your commits with `<` and annotate
+their commits with `>`, like so:
+
+```
+< my commit #3
+< my commit #2
+< my commit #1
+> their commit #1
+```
+
+[git-prompt.sh]: https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh
