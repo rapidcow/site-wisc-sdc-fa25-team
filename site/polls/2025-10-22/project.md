@@ -8,6 +8,25 @@
 
 I was definitely overthinking this.
 
+## Provisional Results
+
+As of Wednesday 10PM we've observed the following votes:
+
+```
+#  NAME
+3  (0) Club Radar
+2  (1) Task Manager
+0  (2) Personal Finance Visualizer
+0  (3) Climate Analyzer
+3  (4) Minecraft with Computer Vision
+```
+
+The finalists are [Club Radar](../../ideas/club-radar),
+[Minecraft with CV](../../ideas/minecraft-cv), and
+[Task Manager](../../ideas/task-manager).  In our next
+meeting we will pick one and go with it....
+
+
 ## Choices
 
 Pros and cons are subjective (to me, Ethan... because I wrote them...

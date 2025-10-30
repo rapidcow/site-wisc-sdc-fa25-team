@@ -1,5 +1,12 @@
 # Club meeting schedule
 
+**Update**: Allie has created a [when2meet](https://www.when2meet.com/?33265403-cPDTO)
+thing as an alternative to my script :(  Use that if you want to,
+but I am going to mirror the availability periods (since i really
+want to use my script after it being completely wasted for CS400...
+(and i also want to be able to check it inside my terminal without
+having to use a web browser))
+
 **ethan:**
 
 *   Saturday, Sunday 11:30 to 17:00
@@ -83,5 +90,5 @@ SUN 17:00
 SUN 22:00
 SUN 24:00
 
-@EOL
+@EOF
 ```

@@ -2,6 +2,13 @@
 
 (Everyone's idea, one of the [ideas](.)!)
 
+## Status
+
+This project is *very likely* to be considered due to receiving 3 votes
+on the [Project decision poll](../polls/2025-10-22/project), tying with
+[Minecraft with Computer Vision](minecraft-cv) and beating
+[Task Manager](task-manager) by one vote.
+
 ## Pitch
 
 [Copied from [meeting notes](../meetings/2025-10-16/#hackathon-club-discovery)]

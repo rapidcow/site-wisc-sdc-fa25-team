@@ -2,10 +2,15 @@
 
 (Saksham's idea; one of the [ideas](.)!)
 
+## Status
+
+This project is *very likely* to be considered due to receiving 3 votes
+on the [Project decision poll](../polls/2025-10-22/project), tying with
+[Club Radar](club-radar) and beating [Task Manager](task-manager) by one vote.
+
 ## Pitch
 
 [Copied from [meeting notes](../meetings/2025-10-16/#minecraft-with-computers)]
-
 
 Using Computer Vision (OpenCV) to control games!  This feels like one of
 those "wow didn't know that was possible" projects I would come across on

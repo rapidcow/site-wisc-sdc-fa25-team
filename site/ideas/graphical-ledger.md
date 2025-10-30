@@ -2,6 +2,13 @@
 
 [One of the [ideas](.)]
 
+## Status
+
+This project has been **removed from consideration** due to receiving
+0 votes on the [Project decision poll](../polls/2025-10-22/project).
+
+## Description
+
 deyan> Create a finance app that tracks your expenses and creates graphs based on the data.
 
 ethan> A double-entry, currency and account agonistic bookkeeping extension/interface
