@@ -55,3 +55,27 @@ simply push your local branch back to it.  I should not
 have to teach you this; please use the GitHub web interface
 if you have no idea what any of this means (otherwise we'd
 be using GitHub for nothing! :)
+
+
+## What you can (and cannot edit)
+
+You have the freedom to edit any thing you want on the `OUR`
+branch.  But I will only propagate edits made to the following
+files to upstreams:
+
+ * Markdown pages (such as this one)
+ * Static assets (images, code snippets, etc.)
+
+The following files will *never* be propagated:
+
+ * Files outside the `site/` subtree
+ * Junk files ([Mac turd](https://apple.stackexchange.com/a/14981), Thumbs.db, etc.)
+ * Temporary files (Vim swap file, backup file, etc.)
+ * Local/derivative files (`.bundle/config`, `vendor/bundle`, `_site`, etc.)
+ * `site/_config.yml`
+ * `site/Gemfile`
+ * `site/Gemfile.lock`
+ * `site/_includes/<anything>`
+ * `site/_layout/<anything>`
+
+Special cases will be evaluated by me on a per-case basis.
