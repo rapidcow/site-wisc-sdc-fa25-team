@@ -14,6 +14,9 @@ src_base: "https://github.com/eyzmeng/site-wisc-sdc-fa25-team"
 src_head: "OUR"
 src_root: "site/"
 
+dst_head: "gh-pages"
+dst_root: "site/"
+
 # https://github.com/pages-themes/minimal
 remote_theme: pages-themes/minimal@v0.2.0
 plugins:
