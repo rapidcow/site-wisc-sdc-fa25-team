@@ -4,7 +4,7 @@
 
 Outbound links are identified by their domain name.
 
-*  [How to use this site!](usage/)
+*  [How to use this site!](usage/) (**READ ME FIRST**)
 *  [Project ideas](ideas/)
 *  [Meeting Memo](meetings)
 *  [Meeting Schedule](meeting/schedule) (**NEW**)
