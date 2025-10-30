@@ -6,6 +6,26 @@
 | **Ended**   | N/A      |
 | **URL**     | <https://discord.com/channels/1428212879026552872/1430837025061474314/1430839905780498432> |
 
+## Provisional Results
+
+As of Wednesday 10PM we've observed the following votes:
+
+```
+#  NAME
+2  (A) I know how to clone/fetch/pull the project repository.
+2  (B) I know how to push to the project repository.
+1  (C) I know how to keep an existing clone up-to-date.
+1  (D) I know how to interpret metachars in manpage SYNOPSIS.
+0  (E) I know what a SHA / object ID (oid) / hash is.
+0  (F) I know how to obtain a permanent GitHub commit link.
+1  (G) I know how to inspect 2 branches' symmetric difference.
+```
+
+I have no idea what to conclude from this.  (I thought the club
+had you guys watch GitHub tutorials or something like that?)
+Anyways, we will go over basic Git operations in the next meeting.
+
+
 ## Choices
 
 This is a survey of everyone's familiarity with the Git

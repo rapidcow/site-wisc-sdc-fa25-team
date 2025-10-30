@@ -17,7 +17,7 @@ Outbound links are identified by their domain name.
 ## *\*\* IMPORTANT *\*\*
 
 The (unofficial) announcements for the team will be posted to the mailing list.
-Announcements start with the email subject `[PSA]` or `Re: [PSA]`.
+Announcements have email subjects with the prefix `[PSA]` or `Re: [PSA]`.
 
  * List archive over HTTP: <https://list.rapidcow.org/inbox/wisc-sdc-fa25-team/>
  * List archive database: <https://github.com/rapidcow/list-wisc-sdc-fa25-team>

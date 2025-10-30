@@ -2,6 +2,11 @@
 
 (Madhav's idea, one of the [ideas](.)!)
 
+## Status
+
+This project has been **removed from consideration** due to receiving
+0 votes on the [Project decision poll](../polls/2025-10-22/project).
+
 ## Pitch
 
 [Copied from [meeting notes](../meetings/2025-10-16/#climate-analyzer)]

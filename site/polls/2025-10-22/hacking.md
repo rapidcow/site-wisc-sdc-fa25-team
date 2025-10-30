@@ -6,6 +6,32 @@
 | **Ended**   | N/A      |
 | **URL**     | <https://discord.com/channels/1428212879026552872/1430837025061474314/1430840852674117672> |
 
+## Provisional Results
+
+As of Wednesday 10PM we've observed the following votes:
+
+```
+#  NAME
+1  (H) I know how to create a pull request.
+1  (I) I know how to update (+ close) a pull request.
+1  (J) I know how to give a code review in GitHub.
+1  (K) I know how to apply a suggestion from GitHub review.
+1  (X) I know how to send plain text emails.
+0  (Y) I know how to send patches to the list.
+0  (Z) I know how to apply suggestion hunks from the list.
+```
+
+Looks like we won't be adapting even the GitHub web interface for
+code review... let's just keep it informal and have everyone work
+on the same branch.  While I remain an advocate of [free software
+needing free tools](https://mako.cc/writing/hill-free_tools.html),
+but [not everyone is a tinkerer](https://news.ycombinator.com/item?id=42538709)
+(or a [hacker](https://phrack.org/issues/7/3) for that matter).
+
+If anyone wants to submit patches to the list, you are still welcome
+to do so.  For now, I'll just have everyone learn the GitHub basics....
+
+
 ## Choices
 
 The collaboration guidelines will be updated at [HACKING](https://github.com/SDC-Fall-2025/Team-17-Project/blob/master/HACKING).

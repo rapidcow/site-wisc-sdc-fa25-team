@@ -1,5 +1,24 @@
 # Project ideas
 
+## Status
+
+We are down to the **final three projects** (from the [poll](../polls/2025-10-22/project))!
+As of Wednesday 10 PM:
+
+*   [Club radar](club-radar) has received 3 votes;
+*   [Minecraft with Computer Vision](minecraft-cv) has received 3 votes;
+*   [Task Manager](task-manager) has received 2 votes.
+
+In our next team meeting we will pick among the finalists
+and do some work at last!!!
+
+*Note*:  Edit this page if you want, but
+new project ideas will not be considered.  (You had plenty
+of time to propose one if you really wanted to, sorry.)
+
+
+## Description
+
 Task Manager
 
 :   ethan> A general-purpose task manager that remembers **deadlines** within
