@@ -114,14 +114,16 @@ sub run
 		$eventname = "$event.$subevent";
 		unless (
 			   $subevent eq 'opened'
+			   # Possibly the most important event of all
+			|| $subevent eq 'synchronize'
 			|| $subevent eq 'ready_for_review'
-			# Note: most edit are not really relevant to us,
-			# though it matters when the base branch is changed.
-			|| $subevent eq 'edit'
+			   # Note: most edits are not really relevant to us,
+			   # though it matters when the base branch is changed.
+			|| $subevent eq 'edited'
 		)
 		{
 			return answer($q,
-				'202 Accepted' => "Thanks, but I won't be handling $subevent :)$CRLF"
+				'202 Accepted' => "Thanks, but I won't be handling $eventname :)$CRLF"
 			);
 		}
 	}
