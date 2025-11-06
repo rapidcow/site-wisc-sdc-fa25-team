@@ -17,6 +17,9 @@ our $VERSION = '0.25.10';
 my @HTTP_TEXT = (
 	-type => 'text/plain; charset="UTF-8"',
 );
+my @HTTP_JSON = (
+	-type => 'application/json; charset="UTF-8"',
+);
 my @HTTP_ACCEPT = (
 	-accept => 'application/json',
 );
@@ -31,6 +34,16 @@ sub answer
 		-status => $status,
 	);
 	print $mesg;
+}
+
+sub restful_answer
+{
+	my ($q, $status, $mesg) = @_;
+	print $q->header(
+		@HTTP_JSON, @HTTP_ACCEPT,
+		-status => $status,
+	);
+	print encode_json $mesg;
 }
 
 sub run
@@ -67,6 +80,7 @@ sub run
 	}
 
 	my $event = $ENV{'HTTP_X_GITHUB_EVENT'};
+	my $eventname = $event;
 	unless (defined $event) {
 		return answer($q, '400 Bad Request',
 			"Missing X-GitHub-Event$CRLF");
@@ -75,7 +89,7 @@ sub run
 	$event eq 'ping' and return answer($q,
 		'202 Accepted' => "Ping!$CRLF"
 	);
-	$event eq 'push' or return answer($q,
+	($event eq 'push' || $event eq 'pull_request') or return answer($q,
 		'202 Accepted' => "Thanks, but I won't be handling $event :)$CRLF"
 	);
 
@@ -92,14 +106,30 @@ sub run
 		return answer($q, '400 Bad Request',
 			"Invalid JSON${CRLF}");
 	}
+
+	if ($event eq 'pull_request') {
+		# The only meaningful actions to us...
+		# <https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request>
+		my $subevent = $json->{action};
+		$eventname = $event.$subevent;
+		unless (
+			   $subevent eq 'opened'
+			|| $subevent eq 'ready_for_review'
+			# Note: most edit are not really relevant to us,
+			# though it matters when the base branch is changed.
+			|| $subevent eq 'edit'
+		)
+		{
+			return answer($q
+				'202 Accepted' => "Thanks, but I won't be handling :)$CRLF"
+			);
+		}
+	}
+
 	# Don't want to show this even for debugging....
 	delete $json->{hook}->{config}->{secret};
-
-	# XXX: Not a real handler, but I'm curious to see what happens
-	$ctx->submit(%$json);
-
-	my $payback = encode_json $json;
-	return answer($q, '202 Accepted', '');
+	my $time = $ctx->submit($event, %$json);
+	restful_answer($q, '202 Accepted', { time => $time, event => $eventname })
 }
 
 1;

@@ -11,6 +11,7 @@ BEGIN {
 sub submit
 {
 	my $self = shift;
+	my $event = shift;
 	my %job = @_;
 	my $time = time;
 	my $conn = $self->{REQUEST_QUEUE_FILE};
@@ -20,12 +21,12 @@ sub submit
 	# it still truncates the file..... we want >>.
 	open my $fh, '>>', $conn or die "open $conn: $!\n";
 
-	print $fh $time;
-	print $fh " ";
+	print $fh $time, ' ', $event, ' ';
 	print $fh $json->encode(\%job) and $fh->flush()
 		or die "write $conn: $!\n";
 	print $fh "\n";
 	close $fh;
+	$time
 }
 
 sub check_payload
