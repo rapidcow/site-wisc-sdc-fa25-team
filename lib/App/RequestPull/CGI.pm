@@ -111,7 +111,7 @@ sub run
 		# The only meaningful actions to us...
 		# <https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request>
 		my $subevent = $json->{action};
-		$eventname = $event.$subevent;
+		$eventname = "$event.$subevent";
 		unless (
 			   $subevent eq 'opened'
 			|| $subevent eq 'ready_for_review'
@@ -121,7 +121,7 @@ sub run
 		)
 		{
 			return answer($q,
-				'202 Accepted' => "Thanks, but I won't be handling :)$CRLF"
+				'202 Accepted' => "Thanks, but I won't be handling $subevent :)$CRLF"
 			);
 		}
 	}
