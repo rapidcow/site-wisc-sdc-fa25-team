@@ -12,6 +12,7 @@
     --white-0: #ddd;
     --white-1: #bbb;
     --white-2: #aaa;
+    --white-3: #999;
     --white-5: #888;
     --black-0: #1f1f1f;
     --black-1: #333;
@@ -87,4 +88,8 @@
     .cp, .c1, .cs, .c, .cd { color: var(--black-2); }
     .nb { color: var(--turquoise-again); }
   }
+
+  // dt { color:#444; }
+  // th { color:#444; }
+  dt, th { color: var(--white-3); }
 }
