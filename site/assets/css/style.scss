@@ -3,10 +3,10 @@
 
 @import "{{ site.theme }}";
 
-/*
-   no thank you github, you're
-   blinding my fucking eyes
- */
+///*
+//   no thank you github, you're
+//   blinding my fucking eyes
+// */
 @media (prefers-color-scheme: dark) {
   :root {
     --white-0: #ddd;
@@ -15,22 +15,23 @@
     --white-5: #888;
     --black-0: #111;
     --black-1: #333;
-    --black-2: #666;  /* from the depths of hell */
-    --cerulean: #39e;  /* 37e makes me want to cry so.... no */
+    --black-2: #666;  ///* from the depths of hell */
+    --cerulean: #39e;  ///* 37e makes me want to cry so.... no */
     --very-cerulean: #05c;
-    --turqoise: #22baba;  /* yes it is misspelled and no i do not care to fix it */
+    --turqoise: #22baba;  ///* yes it is misspelled and no i do not care to fix it */
+    --turquoise-again: #2fa7cf;
   }
 
-  /* MURDER is what you're committing gh,
-   * why on earth would you set to maximum
-   * brightness UAEGGGGHH- */
+  ///* MURDER is what you're committing gh,
+  // * why on earth would you set to maximum
+  // * brightness UAEGGGGHH- */
   // body { background-color: #fff; color:#727272; }
   body {
     background-color: var(--black-0);
     color: var(--white-0);
   }
 
-  /* god someone kill me this godawful css organization */
+  ///* god someone kill me this godawful css organization */
   // h1, h2, h3, h4, h5, h6 { color:#222; margin:0 0 20px; }
   // h1 { font-size:28px; }
   // h2 { color:#393939; }
@@ -43,19 +44,19 @@
   // strong { color:#222; font-weight:700; }
   strong { color: var(--white-0); }
 
-  /* more saturated dude, ts looks depressing as my grades */
+  ///* more saturated dude, ts looks depressing as my grades */
   // a { color:#267CB9; } a:hover, a:focus { color:#069; }
   a                     { color: var(--cerulean); }
   a:hover, a:focus { color: var(--very-cerulean); }
 
-  /* This is fine; though we can still invert it */
+  ///* This is fine; though we can still invert it */
   // a small { color:#777; } a:hover small { color:#777; }
   a small, a:hover small { color: var(--white-5); }
 
   // code, pre { color:#333; }
   code, pre { color: var(--white-2); }
 
-  /* omg no get off */
+  ///* omg no get off */
   // .highlight { background-color: #f8f8f8; }
   .highlight { background-color: var(--black-1); }
   // .highlight {
@@ -72,6 +73,8 @@
   //    .c1 { color: #999988; }
   //    .cs { color: #999999; }
   //    .c, .cd { color: #999988; }
+  //    /* this me no like either */
+  //    .nb { color: #0086B3; }
   // }
   .highlight {
     .k, .kv { color: var(--white-0); }
@@ -82,5 +85,6 @@
     .nn { color: var(--white-5); }
     .na { color: var(--turqoise); }
     .cp, .c1, .cs, .c, .cd { color: var(--black-2); }
+    .nb { color: var(--turquoise-again); }
   }
 }
