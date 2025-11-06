@@ -43,7 +43,7 @@ sub restful_answer
 		@HTTP_JSON, @HTTP_ACCEPT,
 		-status => $status,
 	);
-	print encode_json $mesg;
+	print JSON::XS->new->canonical->encode($mesg);
 }
 
 sub run
