@@ -1,0 +1,86 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/*
+   no thank you github, you're
+   blinding my fucking eyes
+ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --white-0: #ddd;
+    --white-1: #bbb;
+    --white-2: #aaa;
+    --white-5: #888;
+    --black-0: #111;
+    --black-1: #333;
+    --black-2: #666;  /* from the depths of hell */
+    --cerulean: #39e;  /* 37e makes me want to cry so.... no */
+    --very-cerulean: #05c;
+    --turqoise: #22baba;  /* yes it is misspelled and no i do not care to fix it */
+  }
+
+  /* MURDER is what you're committing gh,
+   * why on earth would you set to maximum
+   * brightness UAEGGGGHH- */
+  // body { background-color: #fff; color:#727272; }
+  body {
+    background-color: var(--black-0);
+    color: var(--white-0);
+  }
+
+  /* god someone kill me this godawful css organization */
+  // h1, h2, h3, h4, h5, h6 { color:#222; margin:0 0 20px; }
+  // h1 { font-size:28px; }
+  // h2 { color:#393939; }
+  // h3, h4, h5, h6 { color:#494949; }
+
+  h1 { color: var(--white-0); }
+  h2 { color: var(--white-1); }
+  h3 { color: var(--white-2); }
+
+  // strong { color:#222; font-weight:700; }
+  strong { color: var(--white-0); }
+
+  /* more saturated dude, ts looks depressing as my grades */
+  // a { color:#267CB9; } a:hover, a:focus { color:#069; }
+  a                     { color: var(--cerulean); }
+  a:hover, a:focus { color: var(--very-cerulean); }
+
+  /* This is fine; though we can still invert it */
+  // a small { color:#777; } a:hover small { color:#777; }
+  a small, a:hover small { color: var(--white-5); }
+
+  // code, pre { color:#333; }
+  code, pre { color: var(--white-2); }
+
+  /* omg no get off */
+  // .highlight { background-color: #f8f8f8; }
+  .highlight { background-color: var(--black-1); }
+  // .highlight {
+  //    .k, .kv, .ow, o { color: #000000; },
+  //    .mf, .mh, .il, .mi, .mo { color: #009999; }
+  //    .m, .mb, .mx { color: #009999; }
+  //    .nt { color: #000080; }
+  //    .vc, .vg, .vi, .nv { color: #008080; }
+  //    .nn { color: #555555; }
+  //    .na { color: #008080; }
+  //    /* and for some reason we have */
+  //    .highlight .cm { color: #999988; }
+  //    .cp { color: #999999; }
+  //    .c1 { color: #999988; }
+  //    .cs { color: #999999; }
+  //    .c, .cd { color: #999988; }
+  // }
+  .highlight {
+    .k, .kv { color: var(--white-0); }
+    .mf, .mh, .il, .mi, .mo,
+       .m, .mb, .mx { color: var(--turqoise); }
+    .ow, .o, .nt { color: var(--white-1); }
+    .vc, .vg, .vi, .nv { color: var(--turqoise); }
+    .nn { color: var(--white-5); }
+    .na { color: var(--turqoise); }
+    .cp, .c1, .cs, .c, .cd { color: var(--black-2); }
+  }
+}
