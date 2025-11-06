@@ -175,13 +175,17 @@ my %cgi_env = (
 	};
 	close $tfh;
 
-	like($content, qr/\A\d+ \Q$todo_payload\E\n\z/, "database updated");
-	is($out, treol(CRLF, <<HTTP), 'response looks fine');
+	like($content, qr/\A\d+ push \Q$todo_payload\E\n\z/, "database updated");
+	my $http = <<'HTTP';
 Status: 202 Accepted
 Accept: application/json
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: application/json; charset="UTF-8"
 
 HTTP
+	like($out, qr/
+		\Q@{[treol(CRLF, $http)]}\E
+		\Q{"event":"push","time":\E \d+ \Q}\E
+	/x, 'response looks fine');
 }
 
 #
@@ -236,13 +240,17 @@ HTTP
 	};
 	close $tfh;
 
-	like($content, qr/\A\d+ \Q$todo_payload\E\n\z/, "database updated with sig");
-	is($out, treol(CRLF, <<HTTP), 'response looks fine with sig');
+	like($content, qr/\A\d+ push \Q$todo_payload\E\n\z/, "database updated with sig");
+	my $http = <<'HTTP';
 Status: 202 Accepted
 Accept: application/json
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: application/json; charset="UTF-8"
 
 HTTP
+	like($out, qr/
+		\Q@{[treol(CRLF, $http)]}\E
+		\Q{"event":"push","time":\E \d+ \Q}\E
+	/x, 'response looks fine with sig');
 }
 
 {
@@ -272,7 +280,7 @@ HTTP
 	};
 	close $tfh;
 
-	like($content, qr/\A\d+ \Q$todo_payload\E\n\z/, "database untouched with bag sig");
+	like($content, qr/\A\d+ push \Q$todo_payload\E\n\z/, "database untouched with bag sig");
 	is($out, treol(CRLF, <<HTTP), 'response looks awful with bad sig');
 Status: 403 Forbidden
 Accept: application/json
