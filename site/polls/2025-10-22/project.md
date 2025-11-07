@@ -3,12 +3,12 @@
 [[Today's Polls](.)] [[All polls](..)]
 
 | **Opened**  | Thu, 23 Oct 2025 03:37 -0500    |
-| **Ended**   | N/A      |
+| **Ended**   | Thu, 30 Oct 2025 |
 | **URL**     | <https://discord.com/channels/1428212879026552872/1430837025061474314/1430837561609162763> |
 
 I was definitely overthinking this.
 
-## Provisional Results
+## Results
 
 As of Wednesday 10PM we've observed the following votes:
 
@@ -23,8 +23,28 @@ As of Wednesday 10PM we've observed the following votes:
 
 The finalists are [Club Radar](../../ideas/club-radar),
 [Minecraft with CV](../../ideas/minecraft-cv), and
-[Task Manager](../../ideas/task-manager).  In our next
-meeting we will pick one and go with it....
+[Task Manager](../../ideas/task-manager).  ~~In our next
+meeting we will pick one and go with it....~~
+**Club Radar has been picked due to me (ethan) spending
+a substantial amount of time and effort on it, and it
+being strongly favored in the [previous](../../meetings/2025-10-16/#project-brainstorm)
+in-person meeting.**  The lack of engagement in any of
+the Branches of Interest-worthy Project following the
+poll (despite my emphasis in Discord that any one can
+get started right away) can only be interpreted as a lack
+of interest at even a mere attempt to persuade the rest of
+the group that your particular vote carries weight any more
+than a vague gesture of acknowledgment; and as such I have
+cast *my* final vote to eliminate all but this project, as
+I had been too wrong to take the tie too seriously, too
+blind to see the choices were on me.
+
+Anyways, the deal is sealed.  The `bip/club-radar` branch
+will be merged shortly into master (if not already by the time
+this page is published).  You had plenty of chance to propose
+new ideas or convince everyone to go with your project.  Please
+don't burden me with the possibility of re-considering another
+project, especially when you put in zero time investment....
 
 
 ## Choices
