@@ -2,11 +2,11 @@
 
 [[Today's Polls](.)] [[All polls](..)]
 
-| **Opened**  | Thu, 23 Oct 2025 03:50 -0500    |
-| **Ended**   | N/A      |
-| **URL**     | <https://discord.com/channels/1428212879026552872/1430837025061474314/1430840852674117672> |
+| **Opened** | Thu, 23 Oct 2025 03:50 -0500                                                               |
+| **Ended**  | Thu, 30 Oct 2025                                                                           |
+| **URL**    | <https://discord.com/channels/1428212879026552872/1430837025061474314/1430840852674117672> |
 
-## Provisional Results
+## Results
 
 As of Wednesday 10PM we've observed the following votes:
 
@@ -20,6 +20,8 @@ As of Wednesday 10PM we've observed the following votes:
 0  (Y) I know how to send patches to the list.
 0  (Z) I know how to apply suggestion hunks from the list.
 ```
+
+No additional changes were observed past this point.
 
 Looks like we won't be adapting even the GitHub web interface for
 code review... let's just keep it informal and have everyone work
