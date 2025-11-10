@@ -36,7 +36,7 @@ to do so.  For now, I'll just have everyone learn the GitHub basics....
 
 ## Choices
 
-The collaboration guidelines will be updated at [HACKING](https://github.com/SDC-Fall-2025/Team-17-Project/blob/master/HACKING).
+The collaboration guidelines will be updated at [HACKING](https://github.com/SDC-Fall-2025/Team-17-Club-Radar/blob/master/HACKING).
 *You are not expected to know most of these.*
 
 I know how to create a pull request.
