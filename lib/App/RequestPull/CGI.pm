@@ -121,7 +121,7 @@ sub run
 		)
 		{
 			return answer($q,
-				'202 Accepted' => "Thanks, but I won't be handling $subevent :)$CRLF"
+				'202 Accepted' => "Thanks, but I won't be handling $eventname :)$CRLF"
 			);
 		}
 	}
