@@ -26,7 +26,7 @@ Double check if you have the up-to-date versions for everything we use
 Our **one and only** GitHub project repository is [SDC-Fall-2025](https://github.com/SDC-Fall-2025/Team-17-Club-Radar).
 Participation in *any* other repository is **optional, OPTIONAL, OPTIONAL!!!**
 (If you are confused by the repositories I have shared in the past,
-read my [infrastructure notes](guide/hacking/infra.txt).)
+read my [infrastructure notes](guide/hacker/infra.txt).)
 
 Meeting notes:
 

@@ -81,64 +81,8 @@ Set **core.autocrlf** to true *unless* you are not on Windows.
 I have written in the [installation guide](../../guide/install/git-vcs)
 for how you should set that, and check if it is properly set.
 
-Regarding commits, my expectations are not *that* strict.
-But I still have some standards.
-
-Commits should follow this format:
-
-```
-Short (50-70 columns long) summary
-
-Optional longer description wrapped to 70-76 columns.  For
-example, that was wrapped just before 60 columns.  And this is wrapped
-at 70 columns.  (You will notice that I say columns because East Asian
-characters such as Chinese are wide characters that take up 2 columns.
-So the character count would not translate exactly to column width.)
-```
-
-(It's just not a recommendation from me,  by the way:
-your commit would get squashed on one giant line by
-**git-log**(1) if you do not separate your commit summary
-with a blank line, and they would get truncated in GitHub
-if they exceed the 70-character mark.)
-
-Unlike Tim Pope's popular [Note about Git Commit Messages](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html),
-I do not reinforce capitalization is important (I myself don't
-follow it :)  However, do use imperative voice (add, fix, edit,
-remove, rollback) in your commit summary.  Tenses are weird when
-you think of commits as actions describing a means of change
-from a past version to the present version: you don't say "fixed"
-the bug because the bug *was*, in fact, not fixed until you
-commit the fix.  (And for goodness sake, don't even think about
-third-person, this isn't Javadoc.... =n=)
-
-Commit subjects in general do not need to follow any format (and even
-less so the commit description).  But for commits that modify a
-*specific* frontend page/layout or a backend API, please start the
-commit message with the name of the route followed by the real
-summary.  A few examples are the commits:
-
-*   [route / layout: inject footer](https://github.com/SDC-Fall-2025/Team-17-Club-Radar/commit/ac4d50cff4c02a976dd05c476fbd83a727318bce)
-*   [route / page: change to something more meaningful](https://github.com/SDC-Fall-2025/Team-17-Club-Radar/commit/a3dfcac9b8a90ebf0e394864c8e8edc8485e62ee)
-*   [/api/v1/greet: add ok param](https://github.com/SDC-Fall-2025/Team-17-Club-Radar/commit/fcdb38f3a99af92defc123c4494f30641aeb604e)
-
-In the case of API endpoints, the URI path itself is
-self-documenting, and thus do not require the prefix "route".
-And note that, despite the very informal tone, I consistently
-used a verb with imperative voice.
-
-Just like [the Git project](https://git-scm.com/docs/SubmittingPatches#separate-commits),
-I expect commits to be atomic.  Your Git commits are *not* your
-Google Docs revision history!  Do not commit as you work on
-things by the hour (but do commit when you find yourself needing
-to use two verbs to describe your changes, like "add this and
-fix that"... that's a good sign that you should be breaking up
-your changes!)  Learn to stage files partially using `git add -p`
-or `git commit -ap`.  Commit test files before your bug fix even
-if you wrote test and fixed bugs simultaneously.  Your commit
-history should not have to stay true to your real workflow in
-chronological order: what matters more is that commits make
-*logical* sense.
+There are no Git requirements otherwise.  Write your commits
+in whatever format you like.
 
 
 ## FAQ: Game plan
