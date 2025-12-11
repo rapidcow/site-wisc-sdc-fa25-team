@@ -1,32 +1,26 @@
-# Welcome to the Team 17/11 Information Site!
+# Team 17/11 Information Site
 
-Quick setup:
+**This project is closed.**
 
+Everything will be archived at [SDC-Fall-2025/Team-17.git](https://github.com/SDC-Fall-2025/Team-17-Club-Radar).
+Other than [the repository](https://github.com/rapidcow/site-wisc-sdc-fa25-team)
+this GitHub pages is deployed from and [the public-inbox
+repository](https://github.com/rapidcow/list-wisc-sdc-fa25-team),
+all repositories will be removed.
+
+Review my infrastructure notes at [guide/hacker/infra.txt](guide/hacker/infra.txt)
+if you want to make use of the archive.  If you are a *real*
+hacker, you can read the version that I will actually update
+in the blob at the refspec `refs/info/view:info/hier`:
+read it with **git-show**(1) or **git-cat-file**(1) or whatever.
+
+This is impossible to view on GitHub with a URL that changes
+automatically as the ref gets updated but if you want to a
+link to view it on the web anyways, run:
+
+```sh
+echo https://github.com/SDC-Fall-2025/Team-17/blob/$(git ls-remote https://github.com/SDC-Fall-2025/Team-17.git | awk -F'\t' '$2 == "refs/info/view" {print $1}')/info/hier
 ```
-git clone https://github.com/SDC-Fall-2025/Team-17-Club-Radar.git
-```
-
-For the *one* of you who uses SSH key: <!-- Yes Bridget, I am talking to you -->
-
-```
-git clone git@github.com:SDC-Fall-2025/Team-17-Club-Radar.git
-```
-
-**READ READ READ** before you start!!!
-
-*  Windows users, set `core.autocrlf` to true!  See [Git install guide notes](guide/install/git-vcs).
-*  For setting up the project, read [HACKING](https://github.com/SDC-Fall-2025/Team-17-Club-Radar/blob/master/HACKING#L32).
-
-(All versions I pinned are *important*!  I have tried with older
-versions and they either forbid you to install or fail in strange ways!
-<!-- In particular, Poetry 2.x is a completely different beast from Poetry 1.x. -->
-Double check if you have the up-to-date versions for everything we use
-(triple check if you must)!!!
-
-Our **one and only** GitHub project repository is [SDC-Fall-2025](https://github.com/SDC-Fall-2025/Team-17-Club-Radar).
-Participation in *any* other repository is **optional, OPTIONAL, OPTIONAL!!!**
-(If you are confused by the repositories I have shared in the past,
-read my [infrastructure notes](guide/hacker/infra.txt).)
 
 Meeting notes:
 
@@ -46,18 +40,15 @@ Site map of obsolete links:
    The rationale is summarized in Pull#1.  The message can
    be found in any one of the following locations:
    [[github]](https://github.com/SDC-Fall-2025/Team-17-Club-Radar/pull/1)
-   [[mailing list](https://list.rapidcow.org/inbox/wisc-sdc-fa25-team/1762451972.pull.1.v1+a3dfcac@x.rapidcow.org/)]
    [[commit]](https://github.com/SDC-Fall-2025/Team-17-Club-Radar/commit/cfb765f56e4408a9accbea295c55cc0fd52df565)).
 *  [Polls](polls/)  (No polls are active.)
 
 The (unofficial) announcements for the team will be posted to the mailing list.
 Announcements have email subjects with the prefix `[PSA]` or `Re: [PSA]`.
+No one will have write access to the list, and you are discouraged to
+access my web site for that.
 
- * List archive over HTTP: <https://list.rapidcow.org/inbox/wisc-sdc-fa25-team/>
  * List archive database: <https://github.com/rapidcow/list-wisc-sdc-fa25-team>
- * Post to the list: <mailto:wisc-sdc-fa25-team@list.rapidcow.org>
- * Subscribe to list: <mailto:wisc-sdc-fa25-team+subscribe@list.rapidcow.org>
- * Un-subscribe to list: <mailto:wisc-sdc-fa25-team+unsubscribe@list.rapidcow.org>
 
 **Note about posting**: For those of you who voted "I know how to send
 plain text emails" in the [Collab survey](polls/2025-10-22/hacking),
