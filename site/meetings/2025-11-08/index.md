@@ -40,7 +40,7 @@ the package manager install pnpm.  You should *not*
 have to `sudo npm install -g <anything>`, but feel
 free to resort to it if you must.
 
-Once you are done installing, read [HACKING](github.com/SDC-Fall-2025/Team-17-Club-Radar/blob/master/HACKING#L32)
+Once you are done installing, read [HACKING](github.com/eyzmeng/code-wisc-sdc-fa25-team/blob/master/HACKING#L32)
 from here.  Running the backend and frontend can be
 boiled down to running the following commands:
 

@@ -423,7 +423,7 @@ the world now has CRLF, LF, *and* CR to live with.
 [DOS-WAY]: https://devblogs.microsoft.com/oldnewthing/20040318-00/?p=40193 "from https://stackoverflow.com/a/34797622/19411800"
 [UNIXWAY]: https://web.archive.org/web/20040531194934/http://www.essenz.com/support/comp.unix.misc/Sep/20/40645.html "from https://stackoverflow.com/a/34797622/19411800"
 [JOBSWAY]: https://www.reddit.com/r/ProgrammerHumor/comments/7mbbdl/comment/drtpif4/ "Ironically I found no memo regarding this rash decision either."
-[ICON-CR]: https://github.com/SDC-Fall-2025/Team-17-Club-Radar/blob/cafa8f4849cb6ee1763138254ee5f203a30955c5/.gitignore#L102
+[ICON-CR]: https://github.com/eyzmeng/code-wisc-sdc-fa25-team/blob/cafa8f4849cb6ee1763138254ee5f203a30955c5/.gitignore#L102
 [Bash-fail]: www.reddit.com/r/programming/comments/1hbvik1/comment/m1jbmjy/ "I suspect the &ldquo;nonsensical errors&rdquo; had to do with heredocs, where (I believe) Bash would be picky about whether you entered a EOF or EOF\r, but&hellip; I&rsquo;m not going to test it now. :P"
 <!-- Thank you for still indexing this DuckDuckGo!!! QvQ -->
 [End-of-Transmission]: https://www.asciihex.com/character/control/4/0x04/eot-end-of-transmission
