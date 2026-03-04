@@ -8,7 +8,7 @@ GitHub repository, and under the impression that this is
 an active team: we are *not* and will not be returning
 to the club.)
 
-Everything will be archived at ~~[SDC-Fall-2025/Team-17.git](https://github.com/SDC-Fall-2025/Team-17)~~
+Everything will be archived at ~~SDC-Fall-2025/Team-17.git~~
 [code-wisc-sdc-fa25-team.git](https://github.com/eyzmeng/code-wisc-sdc-fa25-team)
 Other than [the repository](https://github.com/rapidcow/site-wisc-sdc-fa25-team)
 this GitHub pages is deployed from and [the public-inbox
