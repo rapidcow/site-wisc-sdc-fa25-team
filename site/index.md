@@ -1,31 +1,41 @@
 # Team 17/11 Information Site
 
-**This project is closed.**
+**This project is closed.**  (Yes, closed, like
+there is no one besides me doing all of this.)
 
-Everything will be archived at [SDC-Fall-2025/Team-17.git](https://github.com/SDC-Fall-2025/Team-17-Club-Radar).
+(For those of you who followed from the "SDC-Spring-2026"
+GitHub repository, and under the impression that this is
+an active team: we are *not* and will not be returning
+to the club.)
+
+Everything will be archived at ~~[SDC-Fall-2025/Team-17.git](https://github.com/SDC-Fall-2025/Team-17)~~
+[code-wisc-sdc-fa25-team.git](https://github.com/eyzmeng/code-wisc-sdc-fa25-team)
 Other than [the repository](https://github.com/rapidcow/site-wisc-sdc-fa25-team)
 this GitHub pages is deployed from and [the public-inbox
 repository](https://github.com/rapidcow/list-wisc-sdc-fa25-team),
 all repositories will be removed.
 
-Review my infrastructure notes at [guide/hacker/infra.txt](guide/hacker/infra.txt)
-if you want to make use of the archive.  If you are a *real*
-hacker, you can read the version that I will actually update
-in the blob at the refspec `refs/info/view:info/hier`:
-read it with **git-show**(1) or **git-cat-file**(1) or whatever.
-
-This is impossible to view on GitHub with a URL that changes
-automatically as the ref gets updated but if you want to a
-link to view it on the web anyways, run:
+Review my infrastructure notes at `refs/info/view:info/hier`
+if you want to make use of the archive.  This is impossible
+to view on GitHub with a URL that changes automatically as
+the ref gets updated, and I cannot be troubled to provide
+you with a client that discovers the ref for you.  But if
+you want to a link to view it on the web anyways, run:
 
 ```sh
-echo https://github.com/SDC-Fall-2025/Team-17/blob/$(git ls-remote https://github.com/SDC-Fall-2025/Team-17.git | awk -F'\t' '$2 == "refs/info/view" {print $1}')/info/hier
+echo https://github.com/eyzmeng/code-wisc-sdc-fa25-team/blob/`git ls-remote https://github.com/eyzmeng/code-wisc-sdc-fa25-team.git | awk -F'\t' '$2 == "refs/info/view" {print $1}'`/info/hier
 ```
+
+Of course, this assumes that you have a Bourne shell.
+I do not have the time to accommodate for Windows
+shells this time.  Of course, I changed the script
+so that it should run on Csh, but that's as much as
+I am willing to go out on a limb for.
 
 Meeting notes:
 
-*  [October 16, Morgridge Hall 2525](meetings/2025-10-16/)
-*  [November 8, On-Line](meetings/2025-11-08/)
+*  [2025 October 16, Morgridge Hall 2525](meetings/2025-10-16/)
+*  [2025 November 8, On-Line](meetings/2025-11-08/)
 
 Site map of obsolete links:
 
@@ -39,8 +49,10 @@ Site map of obsolete links:
 *  [Project ideas](ideas/)  (Project decision has been made.
    The rationale is summarized in Pull#1.  The message can
    be found in any one of the following locations:
-   [[github]](https://github.com/SDC-Fall-2025/Team-17-Club-Radar/pull/1)
-   [[commit]](https://github.com/SDC-Fall-2025/Team-17-Club-Radar/commit/cfb765f56e4408a9accbea295c55cc0fd52df565)).
+   [[GitHub]](https://github.com/SDC-Spring-2026/Team-17/pull/1)
+   (*subject to be changed by the club*),
+   [email](https://github.com/rapidcow/list-wisc-sdc-fa25-team/blob/master/ce/f7bf696630fe6a13944de5b521e4582531ac7b)
+   [[commit]](https://github.com/eyzmeng/code-wisc-sdc-fa25-team/commit/cfb765f56e4408a9accbea295c55cc0fd52df565)).
 *  [Polls](polls/)  (No polls are active.)
 
 The (unofficial) announcements for the team will be posted to the mailing list.
