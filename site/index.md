@@ -20,7 +20,7 @@ if you want to make use of the archive.  This is impossible
 to view on GitHub with a URL that changes automatically as
 the ref gets updated, and I cannot be troubled to provide
 you with a client that discovers the ref for you.  But if
-you want to a link to view it on the web anyways, run:
+you want a link to view it on the web anyways, run:
 
 ```sh
 echo https://github.com/eyzmeng/code-wisc-sdc-fa25-team/blob/`git ls-remote https://github.com/eyzmeng/code-wisc-sdc-fa25-team.git | awk -F'\t' '$2 == "refs/info/view" {print $1}'`/info/hier
@@ -28,9 +28,9 @@ echo https://github.com/eyzmeng/code-wisc-sdc-fa25-team/blob/`git ls-remote http
 
 Of course, this assumes that you have a Bourne shell.
 I do not have the time to accommodate for Windows
-shells this time.  Of course, I changed the script
-so that it should run on Csh, but that's as much as
-I am willing to go out on a limb for.
+shells this time.  Of course, I changed the script so
+that it should run on C shell too, but that's as much
+as I am willing to go out on a limb for.
 
 Meeting notes:
 
